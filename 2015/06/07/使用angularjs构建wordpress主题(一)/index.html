@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="angularjs,wordpress," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第一章：使用AngularJS和WP JSON API来构建你的Wordpress主题  本文翻译:Using AngularJS and JSON API in Your WordPress Theme  之前我在Code School(一个线上编程学习网站)学习AngularJS的经历让我至今难忘，我在工作中用到wordpress也有一段时间了，学习AngularJS和JSON API在一起">
+<meta name="keywords" content="angularjs,wordpress">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用AngularJS和WP JSON API来构建你的Wordpress主题">
+<meta property="og:url" content="http://blog.wangwenyu.com/2015/06/07/使用angularjs构建wordpress主题(一)/index.html">
+<meta property="og:site_name" content="王文宇的博客">
+<meta property="og:description" content="第一章：使用AngularJS和WP JSON API来构建你的Wordpress主题  本文翻译:Using AngularJS and JSON API in Your WordPress Theme  之前我在Code School(一个线上编程学习网站)学习AngularJS的经历让我至今难忘，我在工作中用到wordpress也有一段时间了，学习AngularJS和JSON API在一起">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/AngularJS-large.png">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/AngularJS_Demo_Theme.png">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/Screen-Shot-2014-11-05-at-4.17.20-PM.png">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/Screen-Shot-2014-11-05-at-4.43.50-PM.png">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/Screen-Shot-2014-11-05-at-5.15.19-PM-e1415179247137.png">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/Screen-Shot-2014-11-05-at-5.28.57-PM.png">
+<meta property="og:updated_time" content="2015-06-07T00:21:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用AngularJS和WP JSON API来构建你的Wordpress主题">
+<meta name="twitter:description" content="第一章：使用AngularJS和WP JSON API来构建你的Wordpress主题  本文翻译:Using AngularJS and JSON API in Your WordPress Theme  之前我在Code School(一个线上编程学习网站)学习AngularJS的经历让我至今难忘，我在工作中用到wordpress也有一段时间了，学习AngularJS和JSON API在一起">
+<meta name="twitter:image" content="https://dn-wangwenyu.qbox.me/AngularJS-large.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.wangwenyu.com/2015/06/07/使用angularjs构建wordpress主题(一)/"/>
+
+
+
+
+
+  <title>使用AngularJS和WP JSON API来构建你的Wordpress主题 | 王文宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王文宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端开发工程师一枚，绝对不是切图狗，再说我是切图狗我就打你</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.wangwenyu.com/2015/06/07/使用angularjs构建wordpress主题(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jacobwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王文宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用AngularJS和WP JSON API来构建你的Wordpress主题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-07T08:21:27+08:00">
+                2015-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/wordpress/" itemprop="url" rel="index">
+                    <span itemprop="name">wordpress</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>第一章：使用AngularJS和WP JSON API来构建你的Wordpress主题</p>
+</blockquote>
+<p>本文翻译:<a href="https://1fix.io/blog/2014/11/05/angularjs-json-api-wp-theme/" target="_blank" rel="noopener">Using AngularJS and JSON API in Your WordPress Theme</a></p>
+<p><img src="https://dn-wangwenyu.qbox.me/AngularJS-large.png" alt="AngularJS-large."></p>
+<p>之前我在<a href="https://www.codeschool.com/courses/shaping-up-with-angular-js" target="_blank" rel="noopener">Code School</a>(一个线上编程学习网站)学习AngularJS的经历让我至今难忘，我在工作中用到wordpress也有一段时间了，学习AngularJS和JSON API在一起使用已经在这周成为我的新爱好。</p>
+  <a id="more"></a>
+<p>当我开始学习一些新东西的时候，我会先通过google（ps:唉。。天朝用百度吧）搜过一些关键字或者一些关键短语，我搜索到了非常全面的资源，我也准备好深度钻研一下了。为了能更精确的搜索到我想要的结果，我使用了一些长尾关键字缩小了搜索范围。幸运的是，搜索‘WordPress JSON API+AngularJS’这个关键词，我找到了很多优秀的资源，在这里，我将我学到的分享给大家。</p>
+<p>在我们开始之前，如果你还不知道AngularJS为何这么流行，为什么Wordpress是一个非常优秀的后台博客程序，你可以参考下这篇文章<a href="http://www.ericwgreene.com/building-wordpress-sites-with-angularjs-and-the-restful-plugin-json-api-devlink-2014/" target="_blank" rel="noopener">this slide shared by Eric W. Greene</a>。这是我之前通过搜索得到的结果。</p>
+<p>即使你不会使用AngularJS，跟着我的教程，你一样能很顺利的编程。现在，打开你常用的代码编辑器，跟着我一起使用AngularJS制作Wordpress主题吧。</p>
+<p>###0.开始<br>如果你有30分钟空闲，我先建议你观看一个视频，<a href="http://wordpress.tv/2014/06/16/eric-w-building-a-wordpress-theme-using-angularjs/" target="_blank" rel="noopener">original video from WordPress.tv</a>(ps:要翻墙的，翻墙之后看巨卡！此段请忽略掉)<br>看完之后你可以学到：</p>
+<ul>
+<li>在Wordpress中引入scripts的方法</li>
+<li>使用JSON REST API (official WP API)</li>
+<li>很简短，并且关注在AngularJS 和 JSON API</li>
+</ul>
+<p>###1.创建一个新主题<br>（ps:在这我就遵照原文翻译了，就不过多赘述Wordpress主题是怎么制作和编写了。因为hexo那个教程还没写完）</p>
+<p>创建一个demo主题，首先这个主题你需要两个文件，分别是index.php和style.css。请确保你的style.css<br>文件写好了正确的<a href="http://codex.wordpress.org/Theme_Development#Theme_Stylesheet" target="_blank" rel="noopener">Wordpress描述</a>，不然很有可能这个主题不会工作。</p>
+<p>接下来粘贴一些简单的HTML代码到你的index.php文件中，就像这样</p>
+<script src="https://gist.github.com/wenyuking/6439f5056681f9b6ae67.js"></script>
+
+<p>登录Wordpress后台，应用这个主题</p>
+<p>###2.下载AngularJS</p>
+<p>你可能通过之前视频中的方法，使用bower将AngularJS下载到你的主题文件夹中了。你也可以通过在AngularJS官网下载，或者你喜欢nodejs的安装方式，那么在终端敲入npm install angular。</p>
+<p>这篇教程主要是简单易行的利用AngularJS开发一个单页应用，这样就肯定免不了AngularJS Route，通过bower或者npm安装起来。bower install angular-route 或者 npm install angular-route.</p>
+<p>如果你是通过bower方式安装的，你所下载的AngularJS文件自动的下载到bower_components这个文件夹里。</p>
+<p>###3.引入脚本文件</p>
+<p>在你的主题文件夹中创建functions.php文件，我们要编写一些函数钩子来引入脚本</p>
+<script src="https://gist.github.com/wenyuking/1ed0fc6b53d7c2412b1a.js"></script>
+
+<p>然后一定要记得添加wp_head(); 这段代码在<head>标签中，这样AngularJS就能在头部被引入进来了。</head></p>
+<script src="https://gist.github.com/wenyuking/f0aa04bf30384092c51d.js"></script>
+
+<p>###4.你好，AngularJS！</p>
+<p>现在我们写一些代码来确保AngularJS能在页面中运行起来吧！</p>
+<script src="https://gist.github.com/wenyuking/6f376e3385b7a4ceb474.js"></script>
+
+<ul>
+<li>第二行：ng-app属性，Angular里面的module，可以让AngularJS在页面中跑起来。</li>
+<li>第十八行：简单的让一个input文本输入框具有双向绑定功能。ng-model=”name”。</li>
+<li>第二十行：通过使用可以通过输入值让页面上的值更新了，双花括号是AngularJS里面的固定的语法。</li>
+</ul>
+<p>现在一个简单的AngularJS功能就实现了，如下图所示：<br><img src="https://dn-wangwenyu.qbox.me/AngularJS_Demo_Theme.png" alt="AngularJS_Demo_Theme"></p>
+<p>###5.你好，AngularJS路由！</p>
+<p>现在，我们让AngularJS的路由功能实现起来，这可能有点复杂，请跟着我的步骤，一步一步的做下去。</p>
+<p>第一步，我们需要覆盖index.php，添加如下代码</p>
+<script src="https://gist.github.com/wenyuking/aa3ae826b932a3bd9c2c.js"></script>
+
+<ul>
+<li>第二行：ng-app属性，Angular里面的module，可以让AngularJS在页面中跑起来。</li>
+<li>第四行：我添加这个是因为在我这会抛出错误，根据文档，base href非常有必要。在这里我说下，注意这个‘/jsonapi/’我的网站根目录是/jsonapi/，所以这里就写/jsonapi/，你在使用过程中请将/jsonapi/改成你的网站的根目录路径</li>
+<li>第十七行：添加ng-view这个属性，是为了让页面能够成功的载入进来。</li>
+</ul>
+<p>第二步，创建一个名为partials的文件夹，添加一个名为main.html的新文件，里面随便写点什么，比如：这是一个主文件。文件夹，还有文件名你可以随意命名。</p>
+<p>第三步，更新你的functions.php文件。我们要引入自己的scripts.js。使用wp_localized_script这个方法，可以使partials文件夹在script.js文件中生效。</p>
+<script src="https://gist.github.com/wenyuking/f55d14330dc9066227b4.js"></script>
+
+<p>第四步，是时候开始写点JavaScript代码了，如果你更改了app或者其他文件名字，请一同将更改后的文件名更新到scripts.js中。</p>
+<script src="https://gist.github.com/wenyuking/d6319d15550c3ade86f2.js"></script>
+
+<p>(ps:补充说下，locationProvider.html5Mode(true);这个是开启html5的history模式的，需要环境支持反向代理，我在使用过程中把这句改成false了，因为我实在配置不好Apache的反向代理。)</p>
+<p>如果你正确操作的话，你看到的页面应该是这个样子的</p>
+<p><img src="https://dn-wangwenyu.qbox.me/Screen-Shot-2014-11-05-at-4.17.20-PM.png" alt="AngularJS_Demo_Theme"></p>
+<p>###6.JSON REST API plugin</p>
+<p>前五步都是在说AngularJS带给我们的魔力的，现在我们将使用JSON REST API，请下载<a href="https://wordpress.org/plugins/json-rest-api/" target="_blank" rel="noopener">JSON REST API</a>并激活它。</p>
+<p>使用JSON REST API，你可以像这样请求到数据</p>
+<p><code>[SITE_URL]wp-json/posts</code></p>
+<p>屏幕上会这样显示</p>
+<p><img src="https://dn-wangwenyu.qbox.me/Screen-Shot-2014-11-05-at-4.43.50-PM.png" alt="AngularJS_Demo_Theme"></p>
+<p>###7.使用AnguJS和JSON API循环显示Wordpress文章</p>
+<p>现在我们通过AngularJS来获取最新的文章，让他们显示在主页上，在scripts.js中，我们要告诉Angulajs通过get方式请求“wp-json/posts/”这个地址。我们可以将成功返回的数据命名为posts</p>
+<script src="https://gist.github.com/wenyuking/7e263e849ac93c885045.js"></script>
+
+<p>然后我们要在main.html文件中更换标记，显示文章列表，使用ng-repeat来循环输出</p>
+<script src="https://gist.github.com/wenyuking/433b818181409df612c0.js"></script>
+
+<p>现在你可以使用API文档提供的键名来输入你想要的数据字段，就像这样</p>
+<p><img src="https://dn-wangwenyu.qbox.me/Screen-Shot-2014-11-05-at-5.15.19-PM-e1415179247137.png" alt="AngularJS_Demo_Theme"></p>
+<p>###8.使用AnguJS和JSON API显示单篇Wordpress文章</p>
+<p>新建个文件，命名为contents.html</p>
+<script src="https://gist.github.com/wenyuking/19145dc1e51816593537.js"></script>
+
+<p>更新你的scripts.js文件</p>
+<script src="https://gist.github.com/wenyuking/f89f9ded9fc7425217ce.js"></script>
+
+<ul>
+<li>第十行：小心，这里有“:” 在ID之前，这是说路由名，如果没有“:” 就会被识别成一个ID的字符串。</li>
+<li>第二十五行：我们告诉AngularJS通过这个 “wp-json/posts/[ID Param]”请求文章，JSON API 会返回给我们一篇文章。</li>
+</ul>
+<p>现在你可以不用通过刷新页面就可以看到一篇文章的内容了，至此，我们完成了一个单页应用。</p>
+<p><img src="https://dn-wangwenyu.qbox.me/Screen-Shot-2014-11-05-at-5.28.57-PM.png" alt="AngularJS_Demo_Theme"></p>
+<p>非常感谢大家花时间在我的这篇教程上，我希望你能像我一样多加学习AngularJS and JSON API 。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Jacobwang wechat" style="width: 200px; max-width: 100%;"/>
+    <div>前端手艺工坊</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/angularjs/" rel="tag"># angularjs</a>
+          
+            <a href="/tags/wordpress/" rel="tag"># wordpress</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/04/一步步带你折腾出一个Hexo博客主题(一)副本/" rel="next" title="一步步带你折腾出一个Hexo博客主题(一)">
+                <i class="fa fa-chevron-left"></i> 一步步带你折腾出一个Hexo博客主题(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/07/使用angularjs构建wordpress主题(二)/" rel="prev" title="在Wordpress主题中使用ngBindHtml显示文章内容">
+                在Wordpress主题中使用ngBindHtml显示文章内容 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jacobwang</p>
+              <p class="site-description motion-element" itemprop="description">皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hyruleteam" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jacobwang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

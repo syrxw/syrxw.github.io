@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端,nodejs,pm2," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署 技术架构 开发环境：MacOS 10.13 程序：Koa+requirejs 服务器：公司内网服务器 Centos6.8 代码托管：公司内部gitlab 程序端口：3000端口 使用pm2进行托管部署">
+<meta name="keywords" content="前端,nodejs,pm2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用pm2与git仓库部署Node应用">
+<meta property="og:url" content="http://blog.wangwenyu.com/2017/10/26/使用pm2与git仓库部署Node应用/index.html">
+<meta property="og:site_name" content="王文宇的博客">
+<meta property="og:description" content="背景近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署 技术架构 开发环境：MacOS 10.13 程序：Koa+requirejs 服务器：公司内网服务器 Centos6.8 代码托管：公司内部gitlab 程序端口：3000端口 使用pm2进行托管部署">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://otu91et2v.bkt.clouddn.com/QQ20171026-194846@2x.png">
+<meta property="og:image" content="http://otu91et2v.bkt.clouddn.com/QQ20171026-201810@2x.png">
+<meta property="og:image" content="http://otu91et2v.bkt.clouddn.com/QQ20171026-202051@2x.png">
+<meta property="og:updated_time" content="2018-04-21T11:01:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用pm2与git仓库部署Node应用">
+<meta name="twitter:description" content="背景近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署 技术架构 开发环境：MacOS 10.13 程序：Koa+requirejs 服务器：公司内网服务器 Centos6.8 代码托管：公司内部gitlab 程序端口：3000端口 使用pm2进行托管部署">
+<meta name="twitter:image" content="http://otu91et2v.bkt.clouddn.com/QQ20171026-194846@2x.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.wangwenyu.com/2017/10/26/使用pm2与git仓库部署Node应用/"/>
+
+
+
+
+
+  <title>使用pm2与git仓库部署Node应用 | 王文宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王文宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端开发工程师一枚，绝对不是切图狗，再说我是切图狗我就打你</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.wangwenyu.com/2017/10/26/使用pm2与git仓库部署Node应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jacobwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王文宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用pm2与git仓库部署Node应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-26T20:26:33+08:00">
+                2017-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">前端杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署</p>
+<h2 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h2><ul>
+<li>开发环境：MacOS 10.13</li>
+<li>程序：Koa+requirejs</li>
+<li>服务器：公司内网服务器 Centos6.8</li>
+<li>代码托管：公司内部gitlab</li>
+<li>程序端口：3000端口 使用pm2进行托管部署</li>
+</ul>
+<a id="more"></a>
+<h2 id="服务器环境初始化"><a href="#服务器环境初始化" class="headerlink" title="服务器环境初始化"></a>服务器环境初始化</h2><p>接下来以公司服务器系统Centos6.8为例进行说明：<br>服务器上需要安装以下程序和依赖</p>
+<ul>
+<li>Nodejs (项目中运用了大量的ES6，ES7语法，所以我们安装是7.9以上版本)</li>
+<li>NPM</li>
+<li>PM2 <code>npm install pm2 -g</code></li>
+<li>Git <code>yum install git</code></li>
+</ul>
+<h3 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h3><p>作为一名极客，我推荐使用ssh命令行连接服务器<br><code>ssh -p 2222 root@212.22.2.22</code><br>(放弃吧，上面的地址是假的，你们连不进去的)</p>
+<h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>这里我推荐使用<code>nvm</code>进行服务器上node版本管理<br>使用命令<br><code>wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash</code></p>
+<p>安装完成之后将nvm写进系统环境变量中，分别执行<br><code>export NVM_DIR=&quot;$HOME/.nvm&quot;</code><br><code>[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot;</code></p>
+<p>使用如下命令安装7.9.0版本的nodejs<br><code>nvm install 7.9.0</code></p>
+<p>安装完成之后会自动切换成7.9.0版本，如果没有切换，可以使用<br><code>nvm use 7.9.0</code><br>具体使用方法请看文末参考文章。</p>
+<p>tips:安装完nvm之后，可能会发现nvm没有生效，这时退出服务器连接再进入就行了</p>
+<h3 id="安装pm2"><a href="#安装pm2" class="headerlink" title="安装pm2"></a>安装pm2</h3><p>由于国内网络不可抗力因素，通常我们安装npm包都很慢，这里推荐切换成淘宝源来安装<br>此处安利神器<code>nrm</code> 这是一个管理你本地npm源的工具，超级好用</p>
+<p>首先安装<code>nrm</code><br><code>npm install nrm --registry=https://registry.npm.taobao.org</code></p>
+<p>安装成功后，使用命令<br><code>nrm ls</code> 看到如下界面：</p>
+<p><img src="http://otu91et2v.bkt.clouddn.com/QQ20171026-194846@2x.png" alt="nrm 列表"></p>
+<p>使用<code>nrm use taobao</code> 选择淘宝源，然后你就可以放肆地下载各种npm包了。</p>
+<p>输入<code>npm install pm2 -g</code> 安装pm2</p>
+<p>服务器初始环境就暂时告一段落，接下来我们回到本地的配置上来。</p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>使用<code>yum install git</code> 进行git的安装<br>这里推荐<a href="http://mirrors.aliyun.com/" target="_blank" rel="noopener">阿里云的镜像</a></p>
+<h3 id="配置Git私钥"><a href="#配置Git私钥" class="headerlink" title="配置Git私钥"></a>配置Git私钥</h3><p>使用<code>ssh-keygen</code>在<code>~/.ssh</code>下生成密钥id_rsa,将生成的id_rsa.pub文件复制到git仓库的ssh-key配置页面中</p>
+<h2 id="本地程序配置"><a href="#本地程序配置" class="headerlink" title="本地程序配置"></a>本地程序配置</h2><p>本地同样要有nodejs，npm，pm2，安装方式和服务器上的一样，这里就不过多赘述。</p>
+<p>本文是基于程序代码托管在git上，换句话说就是使用git进行版本控制的，所以本文所述内容不适合svn用户。</p>
+<h3 id="使用pm2的ecosystem"><a href="#使用pm2的ecosystem" class="headerlink" title="使用pm2的ecosystem"></a>使用pm2的ecosystem</h3><p>终端打开本地程序根目录地址，输入<code>pm2 ecosystem</code>,会在你本地生成一个<code>ecosystem.config.js</code>，参照官方文档，我们的配置如下，仅供参考：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    apps: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: <span class="string">'app'</span>,</span><br><span class="line">            script: <span class="string">'./bin/www'</span>,</span><br><span class="line">            env: &#123;</span><br><span class="line">                COMMON_VARIABLE: <span class="string">'true'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            env_production: &#123;</span><br><span class="line">                NODE_ENV: <span class="string">'production'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    ],</span><br><span class="line">    deploy: &#123;</span><br><span class="line">        production: &#123;</span><br><span class="line">            user: <span class="string">'root'</span>,<span class="comment">//服务器用户名</span></span><br><span class="line">            host: <span class="string">'22.22.222.22'</span>,<span class="comment">//服务器地址</span></span><br><span class="line">            port: <span class="string">'4922'</span>,<span class="comment">//服务器连接端口号，默认不写为22</span></span><br><span class="line">            ref: <span class="string">'origin/master'</span>,<span class="comment">//发布的分支版本</span></span><br><span class="line">            repo: <span class="string">'git@xxx.top:front-end/scapp.git'</span>,<span class="comment">//仓库地址</span></span><br><span class="line">            path: <span class="string">'/home/wwwroot/scapp'</span>,<span class="comment">//发布的服务器文件位置</span></span><br><span class="line">            <span class="string">'post-deploy'</span>: <span class="string">'npm install --production &amp;&amp; pm2 reload ecosystem.config.js --env production'</span>,<span class="comment">//部署后需要执行的命令</span></span><br><span class="line">            env: &#123;</span><br><span class="line">                NODE_ENV: <span class="string">'production'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        dev: &#123;</span><br><span class="line">            user: <span class="string">'root'</span>,</span><br><span class="line">            host: <span class="string">'22.22.222.22'</span>,</span><br><span class="line">            port: <span class="string">'4922'</span>,</span><br><span class="line">            ref: <span class="string">'origin/master'</span>,</span><br><span class="line">            repo: <span class="string">'git@xxx.top:front-end/scapp.git'</span>,</span><br><span class="line">            path: <span class="string">'/home/wwwroot/scapp'</span>,</span><br><span class="line">            <span class="string">'post-deploy'</span>: <span class="string">'npm install --production &amp;&amp; pm2 reload ecosystem.config.js --env dev'</span>,</span><br><span class="line">            env: &#123;</span><br><span class="line">                NODE_ENV: <span class="string">'dev'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>因为pm2的部署是通过ssh进行的，因此需要开通本地到远程服务器的无密码登录，同样，在Mac下，通过ssh-keygen生成RSA公钥，并拷贝到远程服务器：<br><code>scp -P 4922 ~/.ssh/id_rsa.pub root@22.222.22.22:/root/.ssh/authorized_keys</code></p>
+<p>这一步很关键，测试成功的方式就是你通过ssh连接服务器，不用再输入密码了，这里面有不少坑，具体等待各位自己踩坑。</p>
+<p>回到本地应用目录，执行命令：<br><code>pm2 deploy ecosystem.json production setup</code></p>
+<p>成功会提示success，如果失败，提示Host key verification failed. 就是没有将你的git仓库加进known_hosts中，在服务器中，注意，在服务器中执行命令：<br><code>ssh-keyscan -t rsa 你的git仓库地址 &gt;&gt; ~/.ssh/known_hosts</code></p>
+<p>加入成功之后，回到本地继续执行：<br><code>pm2 deploy ecosystem.json production setup</code></p>
+<p>这里的production对应的就是刚才的配置文件中的deploy字段下面的属性。配置文件中我写了production和dev，这里我们使用了production进行发布示例。</p>
+<p>不出意外，成功之后提示</p>
+<p>○ setup complete<br>–&gt; Success</p>
+<h2 id="项目部署"><a href="#项目部署" class="headerlink" title="项目部署"></a>项目部署</h2><h3 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h3><p>这一步很重要，发布之前必须保证git的代码与你本地的保持一致。</p>
+<h3 id="代码发布"><a href="#代码发布" class="headerlink" title="代码发布"></a>代码发布</h3><p>在本地程序根目录下输入：<br><code>pm2 deploy ecosystem.json production</code></p>
+<p>等待服务器上npm的安装，代码的更新，成功之后看到的应该是如下：</p>
+<p><img src="http://otu91et2v.bkt.clouddn.com/QQ20171026-201810@2x.png" alt="发布成功"></p>
+<p>至此，我们的程序发布成功。</p>
+<p>在服务器上输入命令<code>pm2 list</code>查看程序运行的状况<br><img src="http://otu91et2v.bkt.clouddn.com/QQ20171026-202051@2x.png" alt="运行状况"></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="http://bubkoo.com/2017/01/08/quick-tip-multiple-versions-node-nvm/" target="_blank" rel="noopener">使用 nvm 管理不同版本的 node 与 npm</a></li>
+<li><a href="http://www.jianshu.com/p/0deb70e6f395" target="_blank" rel="noopener">npm换源</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/20940096" target="_blank" rel="noopener">通过Github与PM2部署Node应用</a></li>
+<li><a href="https://git-scm.com/book/zh/v1/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5" target="_blank" rel="noopener">服务器上的 Git - 生成 SSH 公钥</a></li>
+<li><a href="http://link.zhihu.com/?target=http%3A//www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/" target="_blank" rel="noopener">SSH Passwordless Login Using SSH Keygen in 5 Easy Steps</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Jacobwang wechat" style="width: 200px; max-width: 100%;"/>
+    <div>前端手艺工坊</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+            <a href="/tags/pm2/" rel="tag"># pm2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/20/git commit emoji 使用指南/" rel="next" title="git commit emoji 使用指南">
+                <i class="fa fa-chevron-left"></i> git commit emoji 使用指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/08/使用React构建Electron应用-入门踩坑篇/" rel="prev" title="使用React构建Electron应用-入门踩坑篇">
+                使用React构建Electron应用-入门踩坑篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jacobwang</p>
+              <p class="site-description motion-element" itemprop="description">皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hyruleteam" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术架构"><span class="nav-number">2.</span> <span class="nav-text">技术架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器环境初始化"><span class="nav-number">3.</span> <span class="nav-text">服务器环境初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连接服务器"><span class="nav-number">3.1.</span> <span class="nav-text">连接服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装nodejs"><span class="nav-number">3.2.</span> <span class="nav-text">安装nodejs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装pm2"><span class="nav-number">3.3.</span> <span class="nav-text">安装pm2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Git"><span class="nav-number">3.4.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Git私钥"><span class="nav-number">3.5.</span> <span class="nav-text">配置Git私钥</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地程序配置"><span class="nav-number">4.</span> <span class="nav-text">本地程序配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用pm2的ecosystem"><span class="nav-number">4.1.</span> <span class="nav-text">使用pm2的ecosystem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目部署"><span class="nav-number">5.</span> <span class="nav-text">项目部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码提交"><span class="nav-number">5.1.</span> <span class="nav-text">代码提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码发布"><span class="nav-number">5.2.</span> <span class="nav-text">代码发布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">6.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jacobwang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

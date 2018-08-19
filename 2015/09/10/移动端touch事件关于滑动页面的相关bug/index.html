@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="HTML5,Mobile," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="上半年我在做移动端开发的过程中，踩坑无数。（其实是自己任性使用各种没用过的技术投产到项目里去，自己给自己挖了一堆坑。。）其中有一个大坑就是在模拟webapp的时候，做了一个listview，就是列表浏览。">
+<meta name="keywords" content="HTML5,Mobile">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端touch事件关于滑动页面的相关bug">
+<meta property="og:url" content="http://blog.wangwenyu.com/2015/09/10/移动端touch事件关于滑动页面的相关bug/index.html">
+<meta property="og:site_name" content="王文宇的博客">
+<meta property="og:description" content="上半年我在做移动端开发的过程中，踩坑无数。（其实是自己任性使用各种没用过的技术投产到项目里去，自己给自己挖了一堆坑。。）其中有一个大坑就是在模拟webapp的时候，做了一个listview，就是列表浏览。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/article2.gif">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/article1.gif">
+<meta property="og:updated_time" content="2015-09-10T07:16:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动端touch事件关于滑动页面的相关bug">
+<meta name="twitter:description" content="上半年我在做移动端开发的过程中，踩坑无数。（其实是自己任性使用各种没用过的技术投产到项目里去，自己给自己挖了一堆坑。。）其中有一个大坑就是在模拟webapp的时候，做了一个listview，就是列表浏览。">
+<meta name="twitter:image" content="https://dn-wangwenyu.qbox.me/article2.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.wangwenyu.com/2015/09/10/移动端touch事件关于滑动页面的相关bug/"/>
+
+
+
+
+
+  <title>移动端touch事件关于滑动页面的相关bug | 王文宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王文宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端开发工程师一枚，绝对不是切图狗，再说我是切图狗我就打你</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.wangwenyu.com/2015/09/10/移动端touch事件关于滑动页面的相关bug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jacobwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王文宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">移动端touch事件关于滑动页面的相关bug</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-10T15:16:15+08:00">
+                2015-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>  上半年我在做移动端开发的过程中，踩坑无数。（其实是自己任性使用各种没用过的技术投产到项目里去，自己给自己挖了一堆坑。。）其中有一个大坑就是在模拟webapp的时候，做了一个listview，就是列表浏览。<br>  <a id="more"></a><br>  首先，我们先看两张图，演示一下这感人的效果</p>
+<p>  ##一张是这个，这是淘宝模特效果</p>
+<p>  <img src="https://dn-wangwenyu.qbox.me/article2.gif" alt="bug再现"></p>
+<p>  ##另一张长这样，这是买家上身效果</p>
+<p>  <img src="https://dn-wangwenyu.qbox.me/article1.gif" alt="bug再现"></p>
+<p>  坑爹呢这是！！！！！！！为毛我滑动屏幕的时候会触发那个容器弹出啊！弹出啊！出啊！啊！</p>
+<p>  #bug为什么会出现呢</p>
+<p>  现在我们用的移动端浏览网页的设备多数都是触摸屏，这就跟我们平时在pc端浏览页面大不一样。所以我们在制作一些网页效果的时候就会用到一个名为touch的事件。<br>  touch事件里面一般来说有三种：touchstart，touchmove，touchend。字面上翻译过来就是，触摸开始，在触摸屏上滑动，触摸结束。<br>  我们在用手指触摸屏幕进行网页浏览的时候，会经历这样的一个过程，手指接触到屏幕（touchstart），手指在屏幕上滑动（touchmove）浏览完手指离开屏幕（touchend）。<br>  问题就在这个过程中出现了，你对你的每个list添加了个touchend事件监听，监听点击这个列表项的时候，触发另一个舞台场景的切换，也就是你放置列表详细内容的容器。本来，这一切都是那么的美好。。但是，你有没有想过，你在滑动屏幕的时候，手指离开的之后，浏览器也会触发你的容器切换事件呢？<br>  稍微的思考一下，就会知道，它会触发的，而且触发的几率几乎高达百分百、、、就是图2所示的。</p>
+<p>  #出现bug总要解决吧</p>
+<p>我确实是解决了这个问题，但是解决方案我感觉有些low逼、、跪求大神提出更好的解决思路</p>
+<p>解决的源码我在最后给出了，代码很简单，非常好理解。并且附上了解决之后的地址</p>
+<p>我在这里就说下我的解决思路（以下提示的代码我只提取核心内容，具体源码看最下方的codepen）：</p>
+<ol>
+<li><p>先获取触摸开始的位置，这个很好获取</p>
+<pre><code>var _self = this;
+   for(var i = 0;i&lt;_self.targetNode.length;i++){
+     _self.touchEvent(_self.targetNode[i],&apos;touchstart&apos;,function(e){
+     _self.startX = e.touches[0].pageX;
+     _self.startY = e.touches[0].pageY;
+
+    })
+ }
+</code></pre></li>
+</ol>
+<p>2.再获取触摸结束的位置</p>
+<pre><code>var _self = this;
+    _self.touchEvent(_$(&apos;body&apos;),&apos;touchmove&apos;,function(e){
+        e.stopPropagation();
+        //获取滑动的的位置
+        _self.moveX = e.touches[0].pageX;
+        _self.moveY = e.touches[0].pageY;
+
+        //获取触摸结束的位置
+        _self.lastdisX = _self.startX-_self.moveX;
+        _self.lastdisY = _self.startY-_self.moveY;
+    })
+</code></pre><p> 3.最后开始位置与最后位置相减，如果相等的话，说明用户只在页面上触发了触摸点击事件，并没有滑动，如果不相等，说明用户触发了页面滑动事件</p>
+<pre><code>var _self  = this;
+   for(var i = 0;i&lt;_self.targetNode.length;i++){
+       _self.touchEvent(_self.targetNode[i],&apos;touchend&apos;,function(e){
+           e.stopPropagation();
+           _self.disX = _self.startX-_self.moveX;
+           _self.disY = _self.startY-_self.moveY;
+
+           //检测是否是同一个位置
+           if(_self.lastdisX == _self.disX){
+               //滑动过程触发的事件
+           }else{
+               //非滑动，单纯触摸触发的事件
+           }
+       })
+   }
+</code></pre><p> 4.这里我要说一下，位置的(0,0)点是在屏幕的左上角，这个跟canvas的坐标点位置也是一样的，所以越往下，坐标取值就越大。</p>
+<p> <div data-height="668" data-theme-id="15797" data-slug-hash="qdwyNx" data-default-tab="js" data-user="Jacobwang" class="codepen"></div></p>
+<p></p><p>See the Pen <a href="http://codepen.io/Jacobwang/pen/qdwyNx/" target="_blank" rel="noopener">qdwyNx</a> by WangWenyu (<a href="http://codepen.io/Jacobwang" target="_blank" rel="noopener">@Jacobwang</a>) on <a href="http://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><br><script async src="//assets.codepen.io/assets/embed/ei.js"></script><p></p>
+<p>以下是解决方案的完整源码，这里我用了个闭包将其封装起来。代码仅供参考，主要是要理解解决的思路，这样才能举一反三，将代码改动一下用在自己的项目里。千万不可一知半解，这样会白白浪费很多时间。<br><a href="http://demo.wangwenyu.com/touch/" target="_blank" rel="noopener">线上测试地址，在移动端模拟器里面打开</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Jacobwang wechat" style="width: 200px; max-width: 100%;"/>
+    <div>前端手艺工坊</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTML5/" rel="tag"># HTML5</a>
+          
+            <a href="/tags/Mobile/" rel="tag"># Mobile</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/10/CSS让图片垂直居中的方式/" rel="next" title="CSS让图片垂直居中的方式">
+                <i class="fa fa-chevron-left"></i> CSS让图片垂直居中的方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/21/PostCSS系列(二)/" rel="prev" title="PostCSS系列(二)-快速上手PostCSS">
+                PostCSS系列(二)-快速上手PostCSS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jacobwang</p>
+              <p class="site-description motion-element" itemprop="description">皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hyruleteam" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jacobwang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
