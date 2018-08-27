@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端,自动化，打包工具," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近在开发一个自定义主题生成工具，需求场景是前台通过修改预置的sass变量，在线生成新的css文件提供下载或者提供内网cdn地址，还可以预览调整的样式。于是花了一两天大致实现了整个流程，其中还踩了几个坑（没有大量阅读文档的后果）现在把实现思路记录并分享出来，希望能给大家一点点参考。">
+<meta name="keywords" content="前端,自动化，打包工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用nodejs在线编译打包心得分享">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/利用nodejs在线编译打包心得分享/index.html">
+<meta property="og:site_name" content="王文宇的博客">
+<meta property="og:description" content="最近在开发一个自定义主题生成工具，需求场景是前台通过修改预置的sass变量，在线生成新的css文件提供下载或者提供内网cdn地址，还可以预览调整的样式。于是花了一两天大致实现了整个流程，其中还踩了几个坑（没有大量阅读文档的后果）现在把实现思路记录并分享出来，希望能给大家一点点参考。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/complie_scss_nodejs.jpg">
+<meta property="og:updated_time" content="2018-08-27T14:50:04.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用nodejs在线编译打包心得分享">
+<meta name="twitter:description" content="最近在开发一个自定义主题生成工具，需求场景是前台通过修改预置的sass变量，在线生成新的css文件提供下载或者提供内网cdn地址，还可以预览调整的样式。于是花了一两天大致实现了整个流程，其中还踩了几个坑（没有大量阅读文档的后果）现在把实现思路记录并分享出来，希望能给大家一点点参考。">
+<meta name="twitter:image" content="http://p8etabqx7.bkt.clouddn.com/complie_scss_nodejs.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/27/利用nodejs在线编译打包心得分享/"/>
+
+
+
+
+
+  <title>利用nodejs在线编译打包心得分享 | 王文宇的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王文宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端开发工程师一枚，绝对不是切图狗，再说我是切图狗我就打你</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/利用nodejs在线编译打包心得分享/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jacobwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王文宇的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用nodejs在线编译打包心得分享</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T22:50:04+08:00">
+                2018-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">前端杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近在开发一个自定义主题生成工具，需求场景是前台通过修改预置的sass变量，在线生成新的css文件提供下载或者提供内网cdn地址，还可以预览调整的样式。于是花了一两天大致实现了整个流程，其中还踩了几个坑（没有大量阅读文档的后果）现在把实现思路记录并分享出来，希望能给大家一点点参考。</p>
+<a id="more"></a>
+<h3 id="用到的技术点"><a href="#用到的技术点" class="headerlink" title="用到的技术点"></a>用到的技术点</h3><p>Nodejs的Koa框架，Redis缓存，node-sass基于libsass c++的node实现</p>
+<h3 id="以编译SCSS文件为例"><a href="#以编译SCSS文件为例" class="headerlink" title="以编译SCSS文件为例"></a>以编译SCSS文件为例</h3><p>这里我先画了个流程图，帮助理解</p>
+<p><img src="http://p8etabqx7.bkt.clouddn.com/complie_scss_nodejs.jpg" alt="complie_scss_nodejs"></p>
+<p>我把整个业务分成了三个功能来做：</p>
+<ul>
+<li>生成编译、并压缩之后的文件</li>
+<li>生成预览样式，不生成文件，不进行压缩，清理</li>
+<li>读取预览样式文件，浏览器请求某个地址，返回类型为text/css样式文件流</li>
+</ul>
+<p>首先程序启动，第一步要做的事就是把要编译的scss入口文件内容写入redis</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="keyword">async</span>(ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> styles = <span class="keyword">await</span> redis.getKey(<span class="string">"origin_scss_data"</span>)</span><br><span class="line">    <span class="keyword">if</span>(!styles)&#123;</span><br><span class="line">        <span class="keyword">const</span> fileData = <span class="keyword">await</span> fs.readFile(<span class="string">`<span class="subst">$&#123;process.cwd()&#125;</span>/src/sass/noa.scss`</span>, <span class="string">'utf8'</span>)</span><br><span class="line">        <span class="keyword">await</span> redis.setKey(<span class="string">"origin_scss_data"</span>,fileData)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">await</span> next();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>接着前台页面编写输入框，并设置好对应的钩子</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"blue"</span> <span class="attr">placeholder</span>=<span class="string">"请输入"</span> <span class="attr">value</span>=<span class="string">"#0090ff"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里将id作为钩子，也可以使用data api作为钩子</p>
+<p>页面放置生成、预览按钮，点击之后通过遍历页面输入框，获取value，生成scss变量内容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateColorMap</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> content = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">    $(<span class="string">'.form-block input[type=text]'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        content += <span class="string">'$'</span>+ $(<span class="keyword">this</span>).attr(<span class="string">'id'</span>) + <span class="string">':'</span> + $(<span class="keyword">this</span>).val()+ <span class="string">';'</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h4><p>点击生成按钮，通过ajax调用后台的生成接口，这里大致附上编译代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生成文件名</span></span><br><span class="line"><span class="keyword">const</span> fileName = ctx.request.body.name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> tempFile = path.join(<span class="string">`/css/<span class="subst">$&#123;fileName&#125;</span>.css`</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> styleResult = <span class="keyword">await</span> <span class="keyword">this</span>._compileStyles(fileName, ctx.request.body.content)</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果buffer流再丢到postcss中去</span></span><br><span class="line"><span class="keyword">await</span> postcss([autoprefixer, comments])</span><br><span class="line">    .process(styleResult.css, &#123;<span class="attr">from</span>: tempFile, <span class="attr">to</span>: tempFile&#125;)</span><br><span class="line">    .then(<span class="keyword">async</span> result =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> output = <span class="keyword">new</span> CleanCSS().minify(result.css);</span><br><span class="line">        <span class="keyword">await</span> fs.outputFile(tempFile, output.styles)</span><br><span class="line">    &#125;)</span><br><span class="line">                </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">async</span> _compileStyles(name, content) &#123;</span><br><span class="line">  <span class="comment">//获取原始入口文件</span></span><br><span class="line">  <span class="keyword">const</span> scssData = <span class="keyword">await</span> redis.getKey(<span class="string">"origin_scss_data"</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//拼合样式</span></span><br><span class="line">  <span class="keyword">const</span> newContent =</span><br><span class="line">      <span class="string">`<span class="subst">$&#123;content&#125;</span></span></span><br><span class="line"><span class="string">          <span class="subst">$&#123;scssData&#125;</span>`</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">//通过node-sass进行编译</span></span><br><span class="line">  <span class="keyword">return</span> sass.renderSync(&#123;</span><br><span class="line">      data: newContent,</span><br><span class="line">      includePaths: [<span class="string">`<span class="subst">$&#123;process.cwd()&#125;</span>/src/sass/`</span>],</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大致流程就是获取前台传入的文件名和scss变量内容，在后台redis中取出原始文件内容，拼合成新的scss文件内容，丢入node-sass中编译，然后通过postcss进行处理，再在本地生成一个css文件</p>
+<h4 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h4><p>生成预览的样式和之前生成样式文件的思路差不多，差别就是文件名是随机生成的，不使用postcss，最后将内容存入redis中，不生成本地文件，当然，这个随机文件名在编译成功后会传回给前台，方便进入下一步跳转。</p>
+<p>预览需要在后台写一个读取文件接口，这里简单写了下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = ctx.query.name</span><br><span class="line"><span class="keyword">const</span> fileData = <span class="keyword">await</span> redis.getKey(<span class="string">`<span class="subst">$&#123;name&#125;</span>`</span>)</span><br><span class="line"></span><br><span class="line">ctx.type = <span class="string">'text/css; charset=utf-8'</span></span><br><span class="line">ctx.body = fileData</span><br></pre></td></tr></table></figure>
+<p>有了读取样式文件的接口，这时我们就要在预览页面带上这个name参数，页面通过获取name参数，请求接口，即可读取到预览暂存的样式文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:3009/loadStyles?name=ignuqzhd6s</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>大致思路看起来很简单，但是值得注意的点有很多：</p>
+<ul>
+<li>初始将文件存入redis，为了减少对磁盘io的次数</li>
+<li>不到最后一步，能不io文件就不去io文件</li>
+<li>写之前泡在npm社区好好读文档</li>
+<li>gulp打包很慢，慎用</li>
+<li>cssnano压缩样式很慢，还有bug，慎用</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Jacobwang wechat" style="width: 200px; max-width: 100%;"/>
+    <div>前端手艺工坊</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/自动化，打包工具/" rel="tag"># 自动化，打包工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/28/如何在gulp项目中优雅的使用ES6/" rel="next" title="如何在gulp项目中优雅的使用ES6">
+                <i class="fa fa-chevron-left"></i> 如何在gulp项目中优雅的使用ES6
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jacobwang</p>
+              <p class="site-description motion-element" itemprop="description">皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hyruleteam" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#用到的技术点"><span class="nav-number">1.</span> <span class="nav-text">用到的技术点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以编译SCSS文件为例"><span class="nav-number">2.</span> <span class="nav-text">以编译SCSS文件为例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成"><span class="nav-number">2.1.</span> <span class="nav-text">生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#预览"><span class="nav-number">2.2.</span> <span class="nav-text">预览</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jacobwang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
