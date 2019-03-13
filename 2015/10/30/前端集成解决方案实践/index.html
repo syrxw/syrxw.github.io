@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh_Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前端集成解决方案是近一两年内炒的比较火的话题，无论是在微博上，在知乎上，以及各种微信公众号，各大技术分享会上，多多少少都会出现前端集成解决方案这样的话题。究竟什么是前端集成解决方案呢。">
+<meta name="keywords" content="gulp,自动化,node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端集成解决方案实践">
+<meta property="og:url" content="http://syrxw.pro/2015/10/30/前端集成解决方案实践/index.html">
+<meta property="og:site_name" content="王文宇的博客">
+<meta property="og:description" content="前端集成解决方案是近一两年内炒的比较火的话题，无论是在微博上，在知乎上，以及各种微信公众号，各大技术分享会上，多多少少都会出现前端集成解决方案这样的话题。究竟什么是前端集成解决方案呢。">
+<meta property="og:locale" content="zh_Hans">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/gulp1.png">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/gulp3.png">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/gulp4.png">
+<meta property="og:image" content="https://dn-wangwenyu.qbox.me/gulp2.png">
+<meta property="og:image" content="http://i1.tietuku.com/df95f5cd8a270731.png">
+<meta property="og:image" content="http://i1.tietuku.com/e0bcc07ac3ccaced.png">
+<meta property="og:image" content="http://i1.tietuku.com/02dc42f46d4454ae.png">
+<meta property="og:updated_time" content="2019-03-13T05:42:15.912Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端集成解决方案实践">
+<meta name="twitter:description" content="前端集成解决方案是近一两年内炒的比较火的话题，无论是在微博上，在知乎上，以及各种微信公众号，各大技术分享会上，多多少少都会出现前端集成解决方案这样的话题。究竟什么是前端集成解决方案呢。">
+<meta name="twitter:image" content="https://dn-wangwenyu.qbox.me/gulp1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://syrxw.pro/2015/10/30/前端集成解决方案实践/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>前端集成解决方案实践 | 王文宇的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王文宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">前端开发工程师一枚，绝对不是切图狗，再说我是切图狗我就打你</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br/>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br/>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/wenyuking" class="github-corner" title="欢迎大家来关注我" aria-label="欢迎大家来关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2015/10/30/前端集成解决方案实践/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王文宇的博客"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">前端集成解决方案实践
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-10-30 09:11:41" itemprop="dateCreated datePublished" datetime="2015-10-30T09:11:41+08:00">2015-10-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-13 13:42:15" itemprop="dateModified" datetime="2019-03-13T13:42:15+08:00">2019-03-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端集成解决方案是近一两年内炒的比较火的话题，无论是在微博上，在知乎上，以及各种微信公众号，各大技术分享会上，多多少少都会出现前端集成解决方案这样的话题。究竟什么是前端集成解决方案呢。</p>
+  <a id="more"></a>
+<p>#开篇<br>所谓 Front-end Integrated Solution（前端集成解决方案），就是对前端开发团队在日常开发的过程中，所经历的几大阶段做一整个集成，由于我写这篇是实践文，所以我直接借助百度前端团队的一个介绍<a href="http://blog.jingwentian.com/post/f2e/qian-duan-ji-cheng-jie-jue-fang-an" target="_blank" rel="noopener">点击查看百度前端团队</a></p>
+<p>#说说要介绍点啥<br>这次我所分享的是我在近三个月的几个项目中的实践总结，主题就是使用 gulp+sass 无痛编写网页，重点是介绍 gulp 的使用。所以这篇文章是写给有一定开发基础的前端看的。</p>
+<p>#现在开始吧<br>废话不多说，开始进入正题。 </p>
+<p>##为什么要使用 gulp？<br>一般前端开发流程中，页面的编写是必不可少的环节，一般的做法就是建立一个项目文件夹，里面放上例如 css，html，images 这样的文件夹，存放项目中所使用到的相关文件，在编写过程中，每编写一段代码就要去手动刷新一次页面，非常麻烦。每次做雪碧图的压缩定位也是一件繁琐的事情，还有项目最终的代码检查，代码打包压缩等等诸如此类的前端开发环节。我们一直在寻找有没有一种方式可以帮我们全自动的跑通这个环节，自动的刷新页面，自动的压缩代码，自动的加上浏览器前缀，自动的做代码检查等等。这个时候，gulp 的出现帮助我解决了这一大问题。 ##如何使用 gulp？<br>gulp 是依赖于 nodejs 环境的，所以使用的时候就是需要通过 npm 的安装方式进行安装。node 的环境配置在这里我就不多说了。具体参考这篇教程<a href="http://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">nodejs 环境的搭建以及 npm 的安装教程</a><br>安装好 nodejs 之后，windows 系统打开 cmd 命令终端，输入命令：</p>
+<pre><code>npm install gulp -g
+</code></pre><p>mac 系统打开自带的终端程序，输入命令：</p>
+<p> sudo npm install gulp -g<br>此时会让你输入管理员密码，输入密码之后敲击回车。安装成功的截图如下：<br><img src="https://dn-wangwenyu.qbox.me/gulp1.png" alt="gulp安装成功截图"></p>
+<p>安装成功之后，在你的项目文件夹根目录建立 gulpfile.js 文件，代码如下：</p>
+<p> <div data-height="468" data-theme-id="15797" data-slug-hash="rVbrey" data-default-tab="js" data-user="Jacobwang" class="codepen"><p>See the Pen <a href="http://codepen.io/Jacobwang/pen/rVbrey/" target="_blank" rel="noopener">rVbrey</a> by WangWenyu (<a href="http://codepen.io/Jacobwang" target="_blank" rel="noopener">@Jacobwang</a>) on <a href="http://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><br></div><script async src="//assets.codepen.io/assets/embed/ei.js"></script></p>
+<p>打开终端，在终端中进入这个文件夹，键入命令：</p>
+<pre><code>npm init
+</code></pre><p><img src="https://dn-wangwenyu.qbox.me/gulp3.png" alt="项目初始化"><br>将你的项目进行初始化，确定你所需要的依赖项。基本上是一路 enter。</p>
+<p>再打开 package.json 文件，添加项目中所需要的 npm 依赖项</p>
+<p></p><p data-height="268" data-theme-id="15797" data-slug-hash="yYEJXK" data-default-tab="js" data-user="Jacobwang" class="codepen">See the Pen <a href="http://codepen.io/Jacobwang/pen/yYEJXK/" target="_blank" rel="noopener">yYEJXK</a> by WangWenyu (<a href="http://codepen.io/Jacobwang" target="_blank" rel="noopener">@Jacobwang</a>) on <a href="http://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>再次键入命令：</p>
+<pre><code>npm install
+</code></pre><p>开始安装之前配置的依赖项。在经过漫长的等待安装完一堆依赖项之后，再次键入命令：</p>
+<pre><code>gulp
+</code></pre><p>此时 gulp 已经运行起来了<br><img src="https://dn-wangwenyu.qbox.me/gulp4.png" alt="gulp的运行"></p>
+<p>到此，我们已经完成了 gulp 的使用介绍，我会在下一篇里面介绍如何通过 gulp 编译 sass 文件以及介绍使用一个神器 livereload。</p>
+<p>在这里我们来分析下 gulpfile.js 这个文件里面的代码。<br>首先是通过 require()方法加载所需要的 npm 模块，接着通过 gulp.task 编写一个任务，里面传入两个参数，第一个是自行定义的方法名，第二个是回调函数，里面写入执行该任务的方法。<br>接下来看每个任务里面的方法，pipe 的作用是让你可以链式的调用 gulp 的各种插件。具体每个插件的用法在 npm 网站上搜索对应的插件名，就可以看到对应的用法文档：例如，我们搜索 gulp-compass，打开<a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm 网站</a>搜索 gulp-compass 插件，可以看到<br><img src="https://dn-wangwenyu.qbox.me/gulp2.png" alt="gulp-compass的使用">。</p>
+<p>gulp.run 方法的作用是运行 gulp 任务。</p>
+<p>gulp.watch 方法作用是监听任务，可以在对应监听的文件改动后自动再次运行该任务，来达到自动化的效果。</p>
+<p>我这里使用到的几个 gulp 的插件功能基本上是合并文件，代码检查，文件压缩重命名，sass 文件编译压缩，自动监听刷新页面。</p>
+<p>在这两个月里我所做的项目中，我都使用到了使用 sass 去编写样式文件，搭配 Gulp 去跑起了整个项目，大大减少了我的工作量，缩短了工作时间。那么，如何才能将 sass 和 gulp 联系在一起使用呢？</p>
+<p>#配置 sass 环境<br>这是非常关键的一步，好的开始就成功了一半。配置 sass 环境是件比较痛苦的事，因为你要装很多东西。 ##安装 ruby<br>众所周知，sass 是用 ruby 编写的一个产物，那么肯定少不了你的机器上得有 ruby 环境。由于我是 OSX 系统，系统一开始已经预置了 ruby 环境，所以在这里我先就不介绍怎么配置 ruby 环境（等我去找个 windows 环境，然后把 windows 的配置给补上）</p>
+<p>##安装 sass<br> 打开终端，键入命令</p>
+<pre><code>gem install sass
+</code></pre><p>等待安装完毕  </p>
+<p>##安装 compass</p>
+<p>想要发挥 sass 的优势，必不可少的就是 compass，同样，跟安装 sass 一样，继续键入命令</p>
+<pre><code>gem install compass
+</code></pre><p>等待安装完毕</p>
+<p>这两个安装完成后，键入命令</p>
+<pre><code>gem list
+</code></pre><p>可以查看到你所安装的模块 ##配置 config.rb</p>
+<p>想要在项目中正常的使用 sass，config.rb 文件必不可少</p>
+<p>  <div data-height="268" data-theme-id="15797" data-slug-hash="yNrRLZ" data-default-tab="js" data-user="Jacobwang" class="codepen"></div></p>
+<p></p><p>See the Pen <a href="http://codepen.io/Jacobwang/pen/yNrRLZ/" target="_blank" rel="noopener">yNrRLZ</a> by WangWenyu (<a href="http://codepen.io/Jacobwang" target="_blank" rel="noopener">@Jacobwang</a>) on <a href="http://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><br><script async src="//assets.codepen.io/assets/embed/ei.js"></script><p></p>
+<p>项目根目录新建 config.rb 文件，把上方代码粘贴进去。前三行是引入一些必要的 sass 模块。<br>http_path = “/“<br>css_dir = “dist/css”<br>sass_dir = “src/sass”<br>images_dir = “dist/images”<br>javascripts_dir = “src/js”</p>
+<p>这一块是配置 sass 文件编译生成对应的目录。</p>
+<p>接着打开 gulpfile.js 文件，找到这句代码</p>
+<pre><code>var gulp = require(&apos;gulp&apos;);
+var compass = require(&apos;gulp-compass&apos;);
+</code></pre><p>这一句是引入 gulp 和 gulp-compass 模块。为什么在这里我不用 gulp 的 sass 模块，因为我在这里引入了网格系统 susy，用 sass 的那个模块，编译 susy 根本通过不了，无奈之下只有退而求其次选择了 gulp-compass 这个</p>
+<pre><code>//compass
+gulp.task(&apos;compass&apos;, function() {
+gulp.src(&apos;./src/sass/main.scss&apos;)
+    .pipe(compass({
+        config_file: &apos;./config.rb&apos;,
+        css: &apos;dist/css&apos;,
+        sass: &apos;src/sass&apos;,
+        require: [&apos;susy&apos;]
+    }))
+    .pipe(gulp.dest(&apos;./dist/css&apos;));
+});
+</code></pre><p>接着找到这一段话，src 方法中传入了对应的要编译的 sass 文件路径，接下来通过刚才的 config.rb 文件，获取定义的 sass 编译信息，系统会找到对应的 compass 模块的位置，进行编译输出 css 文件。<br>接着看到这段代码</p>
+<pre><code>gulp.task(&apos;default&apos;, function(){
+    gulp.run(&apos;compass&apos;);
+    gulp.watch(&apos;src/sass/*/*.scss&apos;, [&apos;compass&apos;]);
+});
+</code></pre><p>这段代码就是配置 gulp 一开始的运行的任务，以及 gulp 所监听的文件改动，这里运行了 compass 这个任务，跟上面定义的任务名一致，写好 gulpfile 之后，终端打开键入命令：</p>
+<pre><code>gulp
+</code></pre><p>即可运行 gulp，记住保持终端的运行，不要关闭窗口。之后你在对 main.scss 这个文件每次修改保存后，gulp 就会自动编译生成对应的 css 文件，非常方便。<br>希望大家在使用 gulp 插件的过程中可以根据刚才的 compass 插件的使用举一反三，插件的用法基本上都是一样的。</p>
+<h1 id="引入-gulp-livereload"><a href="#引入-gulp-livereload" class="headerlink" title="引入 gulp-livereload"></a>引入 gulp-livereload</h1><p>livereload 这个想必大家之前也有听说过，我在 grunt 上就用过这个，但是 grunt 的配置文件太难写，我就一直没有用下去。换到了 gulp 上，gulp 上也有相同的插件 gulp-livereload。打开 gulpfile.js 这个文件，找到这样一句代码：</p>
+<pre><code>var livereload = require(&apos;gulp-livereload&apos;);
+</code></pre><p>引入 livereload 模块</p>
+<p>#如何使用？</p>
+<p>在你编写的任务里面最后加上这样的一个 pipe：.pipe(livereload());就像这样：</p>
+<pre><code> //compass
+gulp.task(&apos;compass&apos;, function() {
+ gulp.src(&apos;./src/sass/main.scss&apos;)
+    .pipe(compass({
+        config_file: &apos;./config.rb&apos;,
+        css: &apos;dist/css&apos;,
+        sass: &apos;src/sass&apos;,
+        require: [&apos;susy&apos;]
+    }))
+    .pipe(gulp.dest(&apos;./dist/css&apos;))
+    .pipe(livereload());
+});
+</code></pre><p>接下来在 default 任务中添加监听方法</p>
+<p> livereload.listen();</p>
+<p> 这样，我们在 gulp 中的对 livereload 配置已经完成。接下来到了至关重要的一步</p>
+<p>#如何让页面自动刷新？</p>
+<p>作为前端开发者，浏览器肯定首选 chrome，这时你必须要安装个扩展程序。当然你是要翻墙的，这里推荐红杏翻墙插件（广告）<br><a href="http://honx.in/_U7uNDuz5NCKtXGk_" target="_blank" rel="noopener">点击这里安装并注册红杏，自觉充值 vip</a></p>
+<p>打开 chrome 之后，这里献上 livereload<a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei" target="_blank" rel="noopener">插件地址</a></p>
+<p><img src="http://i1.tietuku.com/df95f5cd8a270731.png" alt="livereload插件"></p>
+<p>安装完成后，通过本地搭建的服务器，打开你的页面，在浏览器的右上角就能看到这个小图标</p>
+<p><img src="http://i1.tietuku.com/e0bcc07ac3ccaced.png" alt="livereload插件"></p>
+<p>点击一下，图标状态变成了实心的。这时候也就开启了 livereload 对页面的监听。这是你每次编辑 main.scss 这个文件的时候，保存编译成功之后，浏览器就会跟着自动刷新，再也不用进行那烦人的手动刷新了。</p>
+<p><img src="http://i1.tietuku.com/02dc42f46d4454ae.png" alt="livereload插件"></p>
+<p>#总结<br>这就是对前端集成解决方案的一次实践分享，内容我精简了很多，因为实在没时间了。。如果大家有任何疑问的话，就在底下评论，我看到了会一一回复的。时间仓促，请各位包涵。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gulp/" rel="tag"># gulp</a>
+          
+            <a href="/tags/自动化/" rel="tag"># 自动化</a>
+          
+            <a href="/tags/node/" rel="tag"># node</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/22/PostCSS系列/PostCSS系列(四)/" rel="next" title="PostCSS系列(四)-借助Grunt使用PostCSS">
+                <i class="fa fa-chevron-left"></i> PostCSS系列(四)-借助Grunt使用PostCSS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/30/写在我的2015/" rel="prev" title="写在我的2015">
+                写在我的2015 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="手艺人小王"/>
+            
+              <p class="site-author-name" itemprop="name">手艺人小王</p>
+              <div class="site-description motion-element" itemprop="description">皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引入-gulp-livereload"><span class="nav-number">1.</span> <span class="nav-text">引入 gulp-livereload</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">手艺人小王</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

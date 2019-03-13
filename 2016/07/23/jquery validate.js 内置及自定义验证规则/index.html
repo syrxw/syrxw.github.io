@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh_Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="内置的验证规则required:true               必输字段remote:”check.php”           使用ajax方法调用check.php验证输入值email:true                   必须输入正确格式的电子邮件url:true                     必须输入正确格式的网址">
+<meta name="keywords" content="js,jquery,插件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jquery validate.js 内置及自定义验证规则">
+<meta property="og:url" content="http://syrxw.pro/2016/07/23/jquery validate.js 内置及自定义验证规则/index.html">
+<meta property="og:site_name" content="王文宇的博客">
+<meta property="og:description" content="内置的验证规则required:true               必输字段remote:”check.php”           使用ajax方法调用check.php验证输入值email:true                   必须输入正确格式的电子邮件url:true                     必须输入正确格式的网址">
+<meta property="og:locale" content="zh_Hans">
+<meta property="og:updated_time" content="2019-03-13T05:39:12.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jquery validate.js 内置及自定义验证规则">
+<meta name="twitter:description" content="内置的验证规则required:true               必输字段remote:”check.php”           使用ajax方法调用check.php验证输入值email:true                   必须输入正确格式的电子邮件url:true                     必须输入正确格式的网址">
+
+
+
+
+
+
+  <link rel="canonical" href="http://syrxw.pro/2016/07/23/jquery validate.js 内置及自定义验证规则/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>jquery validate.js 内置及自定义验证规则 | 王文宇的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王文宇的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">前端开发工程师一枚，绝对不是切图狗，再说我是切图狗我就打你</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br/>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br/>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/wenyuking" class="github-corner" title="欢迎大家来关注我" aria-label="欢迎大家来关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/07/23/jquery validate.js 内置及自定义验证规则/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王文宇的博客"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">jquery validate.js 内置及自定义验证规则
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-07-23 07:58:26" itemprop="dateCreated datePublished" datetime="2016-07-23T07:58:26+08:00">2016-07-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-13 13:39:12" itemprop="dateModified" datetime="2019-03-13T13:39:12+08:00">2019-03-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="内置的验证规则"><a href="#内置的验证规则" class="headerlink" title="内置的验证规则"></a>内置的验证规则</h2><p>required:true               必输字段<br>remote:”check.php”           使用ajax方法调用check.php验证输入值<br>email:true                   必须输入正确格式的电子邮件<br>url:true                     必须输入正确格式的网址<br><a id="more"></a><br>date:true                   必须输入正确格式的日期<br>dateISO:true                 必须输入正确格式的日期(ISO)，例如：2010-01-01，2010/01/01 只验证格式，不验证有效性<br>number:true                 必须输入合法的数字(负数，小数)<br>digits:true                 必须输入整数<br>creditcard:                 必须输入合法的信用卡号<br>equalTo:”#field”           输入值必须和#field相同<br>accept: “gif|png|jpg” 输入拥有合法后缀名的字符串（上传文件的后缀），多个后缀之间用’|’隔开<br>maxlength:5                 输入长度最多是5的字符串(汉字算一个字符)<br>minlength:10               输入长度最小是10的字符串(汉字算一个字符)<br>rangelength:[5,10]         输入长度必须介于 5 和 10 之间的字符串”)(汉字算一个字符)<br>range:[5,10]               输入值必须介于 5 和 10 之间<br>max:5                       输入值不能大于5<br>min:10                     输入值不能小于10</p>
+<h2 id="自定义验证规则"><a href="#自定义验证规则" class="headerlink" title="自定义验证规则"></a>自定义验证规则</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断两个值是否相等  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"notEqualTo"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element, param</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">return</span> value != $(param).val();  </span><br><span class="line">&#125;, $.validator.format(<span class="string">"两次输入不能相同!"</span>));  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//只能输入数字  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"isNum"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> <span class="built_in">RegExp</span> = <span class="regexp">/^\d+$/</span>;  </span><br><span class="line">   <span class="keyword">return</span> <span class="built_in">RegExp</span>.test(value);  </span><br><span class="line">&#125;, $.validator.format(<span class="string">"只能为数字!"</span>));  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//规则名：buga,value检测对像的值    </span></span><br><span class="line">$.validator.addMethod(<span class="string">"buga"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">return</span> value == <span class="string">"buga"</span>;  </span><br><span class="line">&#125;, <span class="string">'Please enter "buga"!'</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//规则名：chinese，value检测对像的值，element检测的对像    </span></span><br><span class="line">$.validator.addMethod(<span class="string">"chinese"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> chinese = <span class="regexp">/^[\u4e00-\u9fa5]+$/</span>;  </span><br><span class="line">   <span class="keyword">return</span> (chinese.test(value)) || <span class="keyword">this</span>.optional(element);  </span><br><span class="line">&#125;, <span class="string">"只能输入中文"</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//规则名：byteRangeLength，value检测对像的值，element检测的对像,param参数    </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"byteRangeLength"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element, param</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> length = value.length;  </span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;  </span><br><span class="line">       <span class="keyword">if</span> (value.charCodeAt(i) &gt; <span class="number">127</span>) &#123;  </span><br><span class="line">           length++;  </span><br><span class="line">       &#125;  </span><br><span class="line">   &#125;  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || (length &gt;= param[<span class="number">0</span>] &amp;&amp; length &lt;= param[<span class="number">1</span>]);  </span><br><span class="line">&#125;, $.validator.format(<span class="string">"请确保输入的值在&#123;0&#125;-&#123;1&#125;个字节之间(一个中文字算2个字节)"</span>));  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 联系电话(手机/电话皆可)验证  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"isPhone"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> length = value.length;  </span><br><span class="line">   <span class="keyword">var</span> mobile = <span class="regexp">/^(((13[0-9]&#123;1&#125;)|(15[0-9]&#123;1&#125;))+\d&#123;8&#125;)$/</span>;  </span><br><span class="line">   <span class="keyword">var</span> tel = <span class="regexp">/^\d&#123;3,4&#125;-?\d&#123;7,9&#125;$/</span>;  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || (tel.test(value) || mobile.test(value));  </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&#125;, <span class="string">"请正确填写您的联系电话"</span>);  </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 邮政编码验证  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"isZipCode"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> tel = <span class="regexp">/^[0-9]&#123;6&#125;$/</span>;  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || (tel.test(value));  </span><br><span class="line">&#125;, <span class="string">"请正确填写您的邮政编码"</span>);  </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 字符验证  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"string"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || <span class="regexp">/^[\u0391-\uFFE5\w]+$/</span>.test(value);  </span><br><span class="line">&#125;, <span class="string">"不允许包含特殊符号!"</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 必须以特定字符串开头验证  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"begin"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element, param</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> begin = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"^"</span> + param);  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || (begin.test(value));  </span><br><span class="line">&#125;, $.validator.format(<span class="string">"必须以 &#123;0&#125; 开头!"</span>));  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 验证两次输入值是否不相同  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"notEqualTo"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element, param</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">return</span> value != $(param).val();  </span><br><span class="line">&#125;, $.validator.format(<span class="string">"两次输入不能相同!"</span>));  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 验证值不允许与特定值等于  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"notEqual"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element, param</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">return</span> value != param;  </span><br><span class="line">&#125;, $.validator.format(<span class="string">"输入值不允许为&#123;0&#125;!"</span>));  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 验证值必须大于特定值(不能等于)  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"gt"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element, param</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">return</span> value &gt; param;  </span><br><span class="line">&#125;, $.validator.format(<span class="string">"输入值必须大于&#123;0&#125;!"</span>));  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 验证值小数位数不能超过两位  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"decimal"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> decimal = <span class="regexp">/^-?\d+(\.\d&#123;1,2&#125;)?$/</span>;  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || (decimal.test(value));  </span><br><span class="line">&#125;, $.validator.format(<span class="string">"小数位数不能超过两位!"</span>));  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//字母数字  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"alnum"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || <span class="regexp">/^[a-zA-Z0-9]+$/</span>.test(value);  </span><br><span class="line">&#125;, <span class="string">"只能包括英文字母和数字"</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 汉字  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"chcharacter"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> tel = <span class="regexp">/^[\u4e00-\u9fa5]+$/</span>;  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || (tel.test(value));  </span><br><span class="line">&#125;, <span class="string">"请输入汉字"</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 身份证号码验证（加强验证）  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"isIdCardNo"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || <span class="regexp">/^[1-9]\d&#123;7&#125;((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d&#123;3&#125;$/</span>.test(value) || <span class="regexp">/^[1-9]\d&#123;5&#125;[1-9]\d&#123;3&#125;((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d&#123;4&#125;)|\d&#123;3&#125;[A-Z])$/</span>.test(value);  </span><br><span class="line">&#125;, <span class="string">"请正确输入您的身份证号码"</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 手机号码验证  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"isMobile"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> length = value.length;</span><br><span class="line">    <span class="keyword">var</span> mobile = <span class="regexp">/^(((13[0-9]&#123;1&#125;)|(15[0-9]&#123;1&#125;)|(17[0-9]&#123;1&#125;)|(18[0-9]&#123;1&#125;)|(14[0-9]&#123;1&#125;))+\d&#123;8&#125;)$/</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || (length == <span class="number">11</span> &amp;&amp; mobile.test(value));</span><br><span class="line">&#125;, <span class="string">"请正确填写您的手机号码"</span>); </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 电话号码验证  </span></span><br><span class="line">jQuery.validator.addMethod(<span class="string">"isTel"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value, element</span>) </span>&#123;  </span><br><span class="line">   <span class="keyword">var</span> tel = <span class="regexp">/^\d&#123;3,4&#125;-?\d&#123;7,9&#125;$/</span>;    <span class="comment">//电话号码格式010-12345678  </span></span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || (tel.test(value));  </span><br><span class="line">&#125;, <span class="string">"请正确填写您的电话号码"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//页面加载时调用  </span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  </span><br><span class="line">   $(<span class="string">'#cerform'</span>).validate(&#123;  </span><br><span class="line">       rules: &#123;  </span><br><span class="line">           txtUserName: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               maxlength: <span class="number">8</span>,  </span><br><span class="line">               minlength: <span class="number">4</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtUserCardID: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               maxlength: <span class="number">18</span>,  </span><br><span class="line">               minlength: <span class="number">18</span>,  </span><br><span class="line">               isIdCardNo: <span class="string">"#txtUserCardID"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtUserPwd: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               maxlength: <span class="number">18</span>,  </span><br><span class="line">               minlength: <span class="number">6</span>,  </span><br><span class="line">               notEqualTo: <span class="string">"#txtUserPwd"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtRUserPwd: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               equalTo: <span class="string">"#txtUserPwd"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtAddress: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               maxlength: <span class="number">50</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtAreaContent: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               maxlength: <span class="number">300</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtUrl: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               url: <span class="literal">true</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtPhone: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               minlength: <span class="number">7</span>,  </span><br><span class="line">               maxlength: <span class="number">13</span>,  </span><br><span class="line">               isTell: <span class="literal">true</span>,  </span><br><span class="line">               isMobile: <span class="string">"#txtPhone"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtZipCode: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               minlength: <span class="number">6</span>,  </span><br><span class="line">               maxlength: <span class="number">6</span>,  </span><br><span class="line">               isNum: <span class="literal">true</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtEmail: &#123;  </span><br><span class="line">               required: <span class="literal">true</span>,  </span><br><span class="line">               email: <span class="literal">true</span>,  </span><br><span class="line">               maxlength: <span class="number">40</span>  </span><br><span class="line">           &#125;  </span><br><span class="line">       &#125;,  </span><br><span class="line">       messages: &#123;  </span><br><span class="line">           txtUserName: &#123;  </span><br><span class="line">               required: <span class="string">"用户名不能为空！"</span>,  </span><br><span class="line">               maxlength: <span class="string">"最长为18个字符！"</span>,  </span><br><span class="line">               minlength: <span class="string">"最短为4个字符！"</span>,  </span><br><span class="line">               remote: <span class="string">"该用户名已被占用！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtUserCardID: &#123;  </span><br><span class="line">               required: <span class="string">"身份证不能为空！"</span>,  </span><br><span class="line">               maxlength: <span class="string">"身份证为18个字符！"</span>,  </span><br><span class="line">               minlength: <span class="string">"身份证为18个字符！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtUserPwd: &#123;  </span><br><span class="line">               required: <span class="string">"密码不能为空！"</span>,  </span><br><span class="line">               maxlength: <span class="string">"最长为18个字符！"</span>,  </span><br><span class="line">               minlength: <span class="string">"最短为6个字符！"</span>,  </span><br><span class="line">               notEqualTo: <span class="string">"用户名和密码不能相同！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtRUserPwd: &#123;  </span><br><span class="line">               required: <span class="string">"密码不能为空！"</span>,  </span><br><span class="line">               equalTo: <span class="string">"两次输入密码不相同！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtAddress: &#123;  </span><br><span class="line">               required: <span class="string">"地址不能为空！"</span>,  </span><br><span class="line">               maxlength: <span class="string">"最长50个字符！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtAreaContent: &#123;  </span><br><span class="line">               required: <span class="string">"不能为空！"</span>,  </span><br><span class="line">               maxlength: <span class="string">"最长300个字符！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtUrl: &#123;  </span><br><span class="line">               required: <span class="string">"网址不能为空！"</span>,  </span><br><span class="line">               url: <span class="string">"请填写正确的网址！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtPhone: &#123;  </span><br><span class="line">               required: <span class="string">"电话不能为空！"</span>,  </span><br><span class="line">               minlength: <span class="string">"最少7个数字！"</span>,  </span><br><span class="line">               maxlength: <span class="string">"最长13个数字！"</span>,  </span><br><span class="line">               isTell: <span class="string">"电话格式不正确！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtZipCode: &#123;  </span><br><span class="line">               required: <span class="string">"邮编不能为空！"</span>,  </span><br><span class="line">               minlength: <span class="string">"邮编为6个数字！"</span>,  </span><br><span class="line">               maxlength: <span class="string">"邮编为6个数字！"</span>,  </span><br><span class="line">               isNum: <span class="string">"请输入数字！"</span>  </span><br><span class="line">           &#125;,  </span><br><span class="line">           txtEmail: &#123;  </span><br><span class="line">               required: <span class="string">"邮箱不能为空！"</span>,  </span><br><span class="line">               email: <span class="string">"邮箱格式不正确！"</span>,  </span><br><span class="line">               maxlength: <span class="string">"最长40个字符！"</span>  </span><br><span class="line">           &#125;  </span><br><span class="line">       &#125;,  </span><br><span class="line">       errorPlacement: <span class="function"><span class="keyword">function</span> (<span class="params">error, element</span>) </span>&#123;  </span><br><span class="line">           error.appendTo(element.parent());  </span><br><span class="line">       &#125;,  </span><br><span class="line">       submitHandler: <span class="function"><span class="keyword">function</span> (<span class="params">form</span>) </span>&#123;  </span><br><span class="line">           form.submit();  </span><br><span class="line">       &#125;,  </span><br><span class="line">       errorClass: <span class="string">"error"</span>,  </span><br><span class="line">       focusCleanup: <span class="literal">true</span>, <span class="comment">//被验证的元素获得焦点时移除错误信息  </span></span><br><span class="line">       success: <span class="function"><span class="keyword">function</span> (<span class="params">label</span>) </span>&#123;  </span><br><span class="line">           label.html(<span class="string">"&lt;span style=\"color:green\"&gt;填写正确！&lt;/span&gt;"</span>).addClass(<span class="string">"success"</span>);  </span><br><span class="line">       &#125;  </span><br><span class="line">   &#125;);  </span><br><span class="line"> </span><br><span class="line">   <span class="comment">//所有使用“.ipt_txt”样式的文本框加上效果，获得焦点文本框变成淡黄色  </span></span><br><span class="line">   $(<span class="string">".ipt_txt"</span>).focus(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  www<span class="number">.2</span>cto.com</span><br><span class="line">       $(<span class="keyword">this</span>).css(<span class="string">"background-color"</span>, <span class="string">"#FFFFCC"</span>).blur(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  </span><br><span class="line">           $(<span class="keyword">this</span>).css(<span class="string">"background-color"</span>, <span class="string">"#FBFBFB"</span>);  </span><br><span class="line">       &#125;);  </span><br><span class="line">   &#125;);  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+            <a href="/tags/jquery/" rel="tag"># jquery</a>
+          
+            <a href="/tags/插件/" rel="tag"># 插件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/12/EC2搭建vpn服务器/" rel="next" title="EC2搭建vpn服务器">
+                <i class="fa fa-chevron-left"></i> EC2搭建vpn服务器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/01/php 获取系统信息/" rel="prev" title="php 获取系统信息">
+                php 获取系统信息 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="手艺人小王"/>
+            
+              <p class="site-author-name" itemprop="name">手艺人小王</p>
+              <div class="site-description motion-element" itemprop="description">皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端.</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内置的验证规则"><span class="nav-number">1.</span> <span class="nav-text">内置的验证规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义验证规则"><span class="nav-number">2.</span> <span class="nav-text">自定义验证规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用方法"><span class="nav-number">3.</span> <span class="nav-text">调用方法</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">手艺人小王</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
