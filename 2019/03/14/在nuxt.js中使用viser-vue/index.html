@@ -98,25 +98,25 @@
 
 
 
-  <meta name="description" content="react 无状态组件 与 高阶组件">
-<meta name="keywords" content="React">
+  <meta name="description" content="viser-vue几乎就没文档，着实很坑。 首先安装这两个包 12npm install viser-vue npm install @antv/data-set 首先先在plugins文件夹下建立viser-vue.js文件 然后引入viser-vue 123456import Vue from &apos;vue&apos;import ViserVue from &apos;viser-vue&apos;;export defau">
+<meta name="keywords" content="nuxt.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React 无状态组件 与 高阶组件">
-<meta property="og:url" content="http://syrxw.pro/2017/02/20/React 无状态组件 与 高阶组件/index.html">
+<meta property="og:title" content="在nuxt.js中使用viser-vue">
+<meta property="og:url" content="http://syrxw.pro/2019/03/14/在nuxt.js中使用viser-vue/index.html">
 <meta property="og:site_name" content="王文宇的博客">
-<meta property="og:description" content="react 无状态组件 与 高阶组件">
+<meta property="og:description" content="viser-vue几乎就没文档，着实很坑。 首先安装这两个包 12npm install viser-vue npm install @antv/data-set 首先先在plugins文件夹下建立viser-vue.js文件 然后引入viser-vue 123456import Vue from &apos;vue&apos;import ViserVue from &apos;viser-vue&apos;;export defau">
 <meta property="og:locale" content="zh_Hans">
-<meta property="og:updated_time" content="2019-03-13T05:39:46.842Z">
+<meta property="og:updated_time" content="2019-03-14T08:05:18.301Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React 无状态组件 与 高阶组件">
-<meta name="twitter:description" content="react 无状态组件 与 高阶组件">
+<meta name="twitter:title" content="在nuxt.js中使用viser-vue">
+<meta name="twitter:description" content="viser-vue几乎就没文档，着实很坑。 首先安装这两个包 12npm install viser-vue npm install @antv/data-set 首先先在plugins文件夹下建立viser-vue.js文件 然后引入viser-vue 123456import Vue from &apos;vue&apos;import ViserVue from &apos;viser-vue&apos;;export defau">
 
 
 
 
 
 
-  <link rel="canonical" href="http://syrxw.pro/2017/02/20/React 无状态组件 与 高阶组件/"/>
+  <link rel="canonical" href="http://syrxw.pro/2019/03/14/在nuxt.js中使用viser-vue/"/>
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>React 无状态组件 与 高阶组件 | 王文宇的博客</title>
+  <title>在nuxt.js中使用viser-vue | 王文宇的博客</title>
   
 
 
@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2017/02/20/React 无状态组件 与 高阶组件/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/14/在nuxt.js中使用viser-vue/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -338,7 +338,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">React 无状态组件 与 高阶组件
+          <h2 class="post-title" itemprop="name headline">在nuxt.js中使用viser-vue
 
               
             
@@ -364,25 +364,9 @@
                 
               
 
-              <time title="Created: 2017-02-20 09:57:45" itemprop="dateCreated datePublished" datetime="2017-02-20T09:57:45+08:00">2017-02-20</time>
+              <time title="Created: 2019-03-14 16:05:18" itemprop="dateCreated datePublished" datetime="2019-03-14T16:05:18+08:00">2019-03-14</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:39:46" itemprop="dateModified" datetime="2019-03-13T13:39:46+08:00">2019-03-13</time>
-              
             
           </span>
 
@@ -433,25 +417,18 @@
       
 
       
-        <p>react 无状态组件 与 高阶组件<br><a id="more"></a></p>
-<h2 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h2><p>通过函数和闭包,改变已有组件的行为,<br>本质上就是 Decorator 模式在React的一种实现。</p>
-<ul>
-<li>定义</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">"React"</span> ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Enhance = <span class="function">(<span class="params">ComposedComponent</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">        <span class="keyword">constructor</span>() &#123;</span><br><span class="line">            <span class="keyword">this</span>.state = &#123; <span class="attr">data</span>: <span class="literal">null</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        componentDidMount() &#123;</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123; <span class="attr">data</span>: <span class="string">'Hello'</span> &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        render() &#123;</span><br><span class="line">            <span class="keyword">return</span> &lt;ComposedComponent &#123;...this.props&#125; data=&#123;this.state.data&#125; /&gt;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Enhance 是一个方法，当传入一个 Component（ComposedComponent） 的时候，<br>它将自动为该 Component 进行扩展并返回新的类定义。<br>Enhance 中就返回了一个扩展的 Component 类，为构造函数中添加了 state，<br>也在 React 生命周期函数 componentDidMount中添加了处理逻辑，<br>而 render 方法则使用了传入的参数，完成了渲染。</p>
-<ul>
-<li>用法</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  &#123; Component &#125;  <span class="keyword">from</span> <span class="string">"React"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Enhance &#125; <span class="keyword">from</span> <span class="string">"./Enhance"</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> </span>= <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">      render() &#123;</span><br><span class="line">          <span class="keyword">if</span> (!<span class="keyword">this</span>.props.data) <span class="keyword">return</span> &lt;div&gt;Waiting...&lt;/div&gt;;</span><br><span class="line">          <span class="keyword">return</span> &lt;div&gt;&#123;this.data&#125;&lt;/div&gt;;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Enhance(MyComponent); <span class="comment">// Enhanced component`</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>另一个例子</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connectPromise</span>(<span class="params">&#123;promiseLoader, mapResultToProps&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">Comp</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="title">AsyncComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">      <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">          result: <span class="literal">undefined</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      componentDidMount() &#123;</span><br><span class="line">        promiseLoader()</span><br><span class="line">          .then(<span class="function"><span class="params">result</span>=&gt;</span> <span class="keyword">this</span>.setState(&#123;result&#125;))</span><br><span class="line">      &#125;</span><br><span class="line">      render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          &lt;Comp &#123;...mapResultToProps(props)&#125; &#123;...this.props&#125;/&gt;</span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UserList = connectPromise(&#123;</span><br><span class="line">    promiseLoader: loadUsers,</span><br><span class="line">    mapResultToProps: <span class="function"><span class="params">result</span>=&gt;</span> (&#123;<span class="attr">list</span>: result.userList&#125;)</span><br><span class="line">&#125;)(List); <span class="comment">//List can be a pure component</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> BookList = connectPromise(&#123;</span><br><span class="line">    promiseLoader: loadBooks,</span><br><span class="line">    mapResultToProps: <span class="function"><span class="params">result</span>=&gt;</span> (&#123;<span class="attr">list</span>: result.bookList&#125;)</span><br><span class="line">&#125;)(List);</span><br></pre></td></tr></table></figure>
-<h2 id="无状态组件"><a href="#无状态组件" class="headerlink" title="无状态组件"></a>无状态组件</h2><p>无状态组件不支持 ref<br>当无状态组件需要使用到生命周期时，可使用高阶组件包装</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HelloComponent</span>(<span class="params">props, <span class="regexp">/* context */</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &lt;div&gt;Hello &#123;props.name&#125;&lt;/div&gt;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(&lt;HelloComponent name="Sebastian" /&gt;, mountNode)</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Input</span>(<span class="params">&#123; label, name, value, ...props &#125;, &#123; defaultTheme &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; theme, autoFocus, ...rootProps &#125; = props</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;label</span><br><span class="line">      htmlFor=&#123;name&#125;</span><br><span class="line">      children=&#123;label || defaultLabel&#125;</span><br><span class="line">      &#123;...rootProps&#125;</span><br><span class="line">    &gt;</span><br><span class="line">    &lt;input</span><br><span class="line">      name=&#123;name&#125;</span><br><span class="line">      type=<span class="string">"text"</span></span><br><span class="line">      value=&#123;value || <span class="string">''</span>&#125;</span><br><span class="line">      theme=&#123;theme || defaultTheme&#125;</span><br><span class="line">      &#123;...props&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">  )&#125;</span><br><span class="line">Input.contextTypes = &#123;<span class="attr">defaultTheme</span>: React.PropTypes.object&#125;;</span><br></pre></td></tr></table></figure>
-
+        <p>viser-vue几乎就没文档，着实很坑。</p>
+<p>首先安装这两个包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install viser-vue </span><br><span class="line">npm install @antv/data-set</span><br></pre></td></tr></table></figure>
+<p>首先先在<code>plugins</code>文件夹下建<code>立viser-vue.js</code>文件</p>
+<p>然后引入viser-vue</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> ViserVue <span class="keyword">from</span> <span class="string">'viser-vue'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  Vue.use(ViserVue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着在<code>nuxt.config.js</code>文件中的<code>plugins</code>配置中写入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">src</span>:<span class="string">'@/plugins/viser-vue'</span>, <span class="attr">ssr</span>: <span class="literal">false</span>&#125;,</span><br></pre></td></tr></table></figure>
+<p>配置好之后重启项目，这里一定要重启</p>
+<a id="more"></a>
+<p>接着就是提供实际例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div</span><br><span class="line">    &lt;v-chart</span><br><span class="line">      :force-fit=<span class="string">"true"</span></span><br><span class="line">      :height=<span class="string">"height"</span></span><br><span class="line">      :data=<span class="string">"data"</span></span><br><span class="line">      :scale=<span class="string">"scale"</span>&gt;</span><br><span class="line">      &lt;v-tooltip/&gt;</span><br><span class="line">      &lt;v-axis/&gt;</span><br><span class="line">      &lt;v-smooth-line</span><br><span class="line">        :size=<span class="string">"2"</span></span><br><span class="line">        position=<span class="string">"month*temperature"</span></span><br><span class="line">        color=<span class="string">"city"</span>/&gt;</span><br><span class="line">    &lt;<span class="regexp">/v-chart&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  import &#123; View &#125; from '@antv/</span>data-set<span class="string">';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  const sourceData = [</span></span><br><span class="line"><span class="string">    &#123; month: "Jan", Tokyo: 7.0, London: 3.9 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Feb", Tokyo: 6.9, London: 4.2 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Mar", Tokyo: 9.5, London: 5.7 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Apr", Tokyo: 14.5, London: 8.5 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "May", Tokyo: 18.4, London: 11.9 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Jun", Tokyo: 21.5, London: 15.2 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Jul", Tokyo: 25.2, London: 17.0 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Aug", Tokyo: 26.5, London: 16.6 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Sep", Tokyo: 23.3, London: 14.2 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Oct", Tokyo: 18.3, London: 10.3 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Nov", Tokyo: 13.9, London: 6.6 &#125;,</span></span><br><span class="line"><span class="string">    &#123; month: "Dec", Tokyo: 9.6, London: 4.8 &#125;</span></span><br><span class="line"><span class="string">  ];</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  const dv = new View.source(sourceData);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  dv.transform(&#123;</span></span><br><span class="line"><span class="string">    type: "fold",</span></span><br><span class="line"><span class="string">    fields: ["Tokyo", "London"],</span></span><br><span class="line"><span class="string">    key: "city",</span></span><br><span class="line"><span class="string">    value: "temperature"</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br><span class="line"><span class="string">  const data = dv.rows;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  const scale = [&#123;</span></span><br><span class="line"><span class="string">    dataKey: "percent",</span></span><br><span class="line"><span class="string">    min: 0,</span></span><br><span class="line"><span class="string">    formatter: ".2%"</span></span><br><span class="line"><span class="string">  &#125;];</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  export default &#123;</span></span><br><span class="line"><span class="string">    data() &#123;</span></span><br><span class="line"><span class="string">      return &#123;</span></span><br><span class="line"><span class="string">        data,</span></span><br><span class="line"><span class="string">        scale,</span></span><br><span class="line"><span class="string">        height: 400</span></span><br><span class="line"><span class="string">      &#125;;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -474,7 +451,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/React/" rel="tag"># React</a>
+            <a href="/tags/nuxt-js/" rel="tag"># nuxt.js</a>
           
         </div>
       
@@ -487,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/01/php 获取系统信息/" rel="next" title="php 获取系统信息">
-                <i class="fa fa-chevron-left"></i> php 获取系统信息
+              <a href="/2019/03/11/CentOS 7.x 搭建LNMP环境(长期更新中)/" rel="next" title="CentOS 7.x 搭建LNMP环境(长期更新中)">
+                <i class="fa fa-chevron-left"></i> CentOS 7.x 搭建LNMP环境(长期更新中)
               </a>
             
           </div>
@@ -496,10 +473,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/30/axios自动刷新 JWT Token/" rel="prev" title="axios 自动刷新 JWT Token">
-                axios 自动刷新 JWT Token <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -543,17 +516,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -737,23 +701,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#高阶组件"><span class="nav-number">1.</span> <span class="nav-text">高阶组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无状态组件"><span class="nav-number">2.</span> <span class="nav-text">无状态组件</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
