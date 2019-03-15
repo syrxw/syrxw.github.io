@@ -99,18 +99,19 @@
 
 
   <meta name="description" content="背景近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署 技术架构 开发环境：MacOS 10.13 程序：Koa+requirejs 服务器：公司内网服务器 Centos6.8 代码托管：公司内部gitlab 程序端口：3000端口 使用pm2进行托管部署  服务器环境初始化接下来">
+<meta name="keywords" content="git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="手艺人小王">
-<meta property="og:url" content="http://syrxw.pro/2019/03/15/使用pm2与git仓库部署Node应用/index.html">
+<meta property="og:title" content="使用pm2与git仓库部署Node应用">
+<meta property="og:url" content="http://syrxw.pro/2017/10/26/使用pm2与git仓库部署Node应用/index.html">
 <meta property="og:site_name" content="手艺人小王">
 <meta property="og:description" content="背景近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署 技术架构 开发环境：MacOS 10.13 程序：Koa+requirejs 服务器：公司内网服务器 Centos6.8 代码托管：公司内部gitlab 程序端口：3000端口 使用pm2进行托管部署  服务器环境初始化接下来">
 <meta property="og:locale" content="zh_Hans">
 <meta property="og:image" content="http://otu91et2v.bkt.clouddn.com/QQ20171026-194846@2x.png">
 <meta property="og:image" content="http://otu91et2v.bkt.clouddn.com/QQ20171026-201810@2x.png">
 <meta property="og:image" content="http://otu91et2v.bkt.clouddn.com/QQ20171026-202051@2x.png">
-<meta property="og:updated_time" content="2019-03-15T06:16:01.932Z">
+<meta property="og:updated_time" content="2019-03-15T06:29:15.884Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="手艺人小王">
+<meta name="twitter:title" content="使用pm2与git仓库部署Node应用">
 <meta name="twitter:description" content="背景近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署 技术架构 开发环境：MacOS 10.13 程序：Koa+requirejs 服务器：公司内网服务器 Centos6.8 代码托管：公司内部gitlab 程序端口：3000端口 使用pm2进行托管部署  服务器环境初始化接下来">
 <meta name="twitter:image" content="http://otu91et2v.bkt.clouddn.com/QQ20171026-194846@2x.png">
 
@@ -119,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://syrxw.pro/2019/03/15/使用pm2与git仓库部署Node应用/"/>
+  <link rel="canonical" href="http://syrxw.pro/2017/10/26/使用pm2与git仓库部署Node应用/"/>
 
 
 
@@ -129,7 +130,7 @@
   };
 </script>
 
-  <title> | 手艺人小王</title>
+  <title>使用pm2与git仓库部署Node应用 | 手艺人小王</title>
   
 
 
@@ -324,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/使用pm2与git仓库部署Node应用/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2017/10/26/使用pm2与git仓库部署Node应用/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -341,7 +342,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">使用pm2与git仓库部署Node应用
 
               
             
@@ -367,12 +368,46 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+              <time title="Created: 2017-10-26 15:30:16" itemprop="dateCreated datePublished" datetime="2017-10-26T15:30:16+08:00">2017-10-26</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-15 14:29:15" itemprop="dateModified" datetime="2019-03-15T14:29:15+08:00">2019-03-15</time>
+              
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/运维挖坑/" itemprop="url" rel="index"><span itemprop="name">运维挖坑</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -478,6 +513,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
 
       
       
@@ -487,8 +528,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/15/使用React构建Electron应用-入门踩坑篇/" rel="next" title="使用React构建Electron应用-入门踩坑篇">
-                <i class="fa fa-chevron-left"></i> 使用React构建Electron应用-入门踩坑篇
+              <a href="/2017/09/02/git commit emoji 使用指南/" rel="next" title="git commit emoji 使用指南">
+                <i class="fa fa-chevron-left"></i> git commit emoji 使用指南
               </a>
             
           </div>
@@ -497,8 +538,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/15/Nuxt.js的探索与实践/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/11/nginx反向代理下获取用户真实ip/" rel="prev" title="nginx反向代理下获取用户真实ip">
+                nginx反向代理下获取用户真实ip <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -572,7 +613,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -611,7 +652,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -708,7 +751,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

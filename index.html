@@ -320,669 +320,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/git commit emoji 使用指南/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/15/git commit emoji 使用指南/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="git-commit-emoji-使用指南"><a href="#git-commit-emoji-使用指南" class="headerlink" title="git commit emoji 使用指南"></a>git commit emoji 使用指南</h1><p>执行 <code>git commit</code> 时使用 emoji 为本次提交打上一个 “标签”, 使得此次 commit 的主要工作得以凸现，也能够使得其在整个提交历史中易于区分与查找。</p>
-<p>截取的 <a href="https://github.com/carloscuesta/gitmoji" target="_blank" rel="noopener">gitmoji</a> 快照:</p>
-<p><img src="http://otu91et2v.bkt.clouddn.com/snapshot.png" alt="gitmoji-snapshot"></p>
-<h3 id="commit-格式"><a href="#commit-格式" class="headerlink" title="commit 格式"></a>commit 格式</h3><p><code>git commit</code> 时，提交信息遵循以下格式：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:emoji1: :emoji2: 主题</span><br><span class="line"></span><br><span class="line">提交信息主体</span><br><span class="line"></span><br><span class="line">Ref &lt;<span class="comment">###&gt;</span></span><br></pre></td></tr></table></figure>
-<p>初次提交示例：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">":tada: Initialize Repo"</span></span><br></pre></td></tr></table></figure>
-<h3 id="emoji-指南"><a href="#emoji-指南" class="headerlink" title="emoji 指南"></a>emoji 指南</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">emoji</th>
-<th style="text-align:left">emoji 代码</th>
-<th style="text-align:left">commit 说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">:art: (调色板)</td>
-<td style="text-align:left"><code>:art:</code></td>
-<td style="text-align:left">改进代码结构/代码格式</td>
-</tr>
-<tr>
-<td style="text-align:left">:zap: (闪电)<br>:racehorse: (赛马)</td>
-<td style="text-align:left"><code>:zap:</code><br><code>:racehorse:</code></td>
-<td style="text-align:left">提升性能</td>
-</tr>
-<tr>
-<td style="text-align:left">:fire: (火焰)</td>
-<td style="text-align:left"><code>:fire:</code></td>
-<td style="text-align:left">移除代码或文件</td>
-</tr>
-<tr>
-<td style="text-align:left">:bug: (bug)</td>
-<td style="text-align:left"><code>:bug:</code></td>
-<td style="text-align:left">修复 bug</td>
-</tr>
-<tr>
-<td style="text-align:left">:ambulance: (急救车)</td>
-<td style="text-align:left"><code>:ambulance:</code></td>
-<td style="text-align:left">重要补丁</td>
-</tr>
-<tr>
-<td style="text-align:left">:sparkles: (火花)</td>
-<td style="text-align:left"><code>:sparkles:</code></td>
-<td style="text-align:left">引入新功能</td>
-</tr>
-<tr>
-<td style="text-align:left">:memo: (备忘录)</td>
-<td style="text-align:left"><code>:memo:</code></td>
-<td style="text-align:left">撰写文档</td>
-</tr>
-<tr>
-<td style="text-align:left">:rocket: (火箭)</td>
-<td style="text-align:left"><code>:rocket:</code></td>
-<td style="text-align:left">部署功能</td>
-</tr>
-<tr>
-<td style="text-align:left">:lipstick: (口红)</td>
-<td style="text-align:left"><code>:lipstick:</code></td>
-<td style="text-align:left">更新 UI 和样式文件</td>
-</tr>
-<tr>
-<td style="text-align:left">:tada: (庆祝)</td>
-<td style="text-align:left"><code>:tada:</code></td>
-<td style="text-align:left">初次提交</td>
-</tr>
-<tr>
-<td style="text-align:left">:white_check_mark: (白色复选框)</td>
-<td style="text-align:left"><code>:white_check_mark:</code></td>
-<td style="text-align:left">增加测试</td>
-</tr>
-<tr>
-<td style="text-align:left">:lock: (锁)</td>
-<td style="text-align:left"><code>:lock:</code></td>
-<td style="text-align:left">修复安全问题</td>
-</tr>
-<tr>
-<td style="text-align:left">:apple: (苹果)</td>
-<td style="text-align:left"><code>:apple:</code></td>
-<td style="text-align:left">修复 macOS 下的问题</td>
-</tr>
-<tr>
-<td style="text-align:left">:penguin: (企鹅)</td>
-<td style="text-align:left"><code>:penguin:</code></td>
-<td style="text-align:left">修复 Linux 下的问题</td>
-</tr>
-<tr>
-<td style="text-align:left">:checkered_flag: (旗帜)</td>
-<td style="text-align:left"><code>:checked_flag:</code></td>
-<td style="text-align:left">修复 Windows 下的问题</td>
-</tr>
-<tr>
-<td style="text-align:left">:bookmark: (书签)</td>
-<td style="text-align:left"><code>:bookmark:</code></td>
-<td style="text-align:left">发行/版本标签</td>
-</tr>
-<tr>
-<td style="text-align:left">:rotating_light: (警车灯)</td>
-<td style="text-align:left"><code>:rotating_light:</code></td>
-<td style="text-align:left">移除 linter 警告</td>
-</tr>
-<tr>
-<td style="text-align:left">:construction: (施工)</td>
-<td style="text-align:left"><code>:construction:</code></td>
-<td style="text-align:left">工作进行中</td>
-</tr>
-<tr>
-<td style="text-align:left">:green_heart: (绿心)</td>
-<td style="text-align:left"><code>:green_heart:</code></td>
-<td style="text-align:left">修复 CI 构建问题</td>
-</tr>
-<tr>
-<td style="text-align:left">:arrow_down: (下降箭头)</td>
-<td style="text-align:left"><code>:arrow_down:</code></td>
-<td style="text-align:left">降级依赖</td>
-</tr>
-<tr>
-<td style="text-align:left">:arrow_up: (上升箭头)</td>
-<td style="text-align:left"><code>:arrow_up:</code></td>
-<td style="text-align:left">升级依赖</td>
-</tr>
-<tr>
-<td style="text-align:left">:construction_worker: (工人)</td>
-<td style="text-align:left"><code>:construction_worker:</code></td>
-<td style="text-align:left">添加 CI 构建系统</td>
-</tr>
-<tr>
-<td style="text-align:left">:chart_with_upwards_trend: (上升趋势图)</td>
-<td style="text-align:left"><code>:chart_with_upwards_trend:</code></td>
-<td style="text-align:left">添加分析或跟踪代码</td>
-</tr>
-<tr>
-<td style="text-align:left">:hammer: (锤子)</td>
-<td style="text-align:left"><code>:hammer:</code></td>
-<td style="text-align:left">重大重构</td>
-</tr>
-<tr>
-<td style="text-align:left">:heavy_minus_sign: (减号)</td>
-<td style="text-align:left"><code>:heavy_minus_sign:</code></td>
-<td style="text-align:left">减少一个依赖</td>
-</tr>
-<tr>
-<td style="text-align:left">:whale: (鲸鱼)</td>
-<td style="text-align:left"><code>:whale:</code></td>
-<td style="text-align:left">Docker 相关工作</td>
-</tr>
-<tr>
-<td style="text-align:left">:heavy_plus_sign: (加号)</td>
-<td style="text-align:left"><code>:heavy_plus_sign:</code></td>
-<td style="text-align:left">增加一个依赖</td>
-</tr>
-<tr>
-<td style="text-align:left">:wrench: (扳手)</td>
-<td style="text-align:left"><code>:wrench:</code></td>
-<td style="text-align:left">修改配置文件</td>
-</tr>
-<tr>
-<td style="text-align:left">:globe_with_meridians: (地球)</td>
-<td style="text-align:left"><code>:globe_with_meridians:</code></td>
-<td style="text-align:left">国际化与本地化</td>
-</tr>
-<tr>
-<td style="text-align:left">:pencil2: (铅笔)</td>
-<td style="text-align:left"><code>:pencil2:</code></td>
-<td style="text-align:left">修复 typo</td>
-</tr>
-</tbody>
-</table>
-<h3 id="如何在命令行中显示-emoji"><a href="#如何在命令行中显示-emoji" class="headerlink" title="如何在命令行中显示 emoji"></a>如何在命令行中显示 emoji</h3><p>默认情况下，在命令行中并不会显示出 emoji, 仅显示 emoji 代码。不过可以使用 <a href="https://github.com/mrowa44/emojify" target="_blank" rel="noopener">emojify</a> 使得在命令行也可显示 emoji, 它是一个 shell 脚本，安装与使用都很简单，在 <a href="https://github.com/mrowa44/emojify" target="_blank" rel="noopener">这里</a> 查看如何安装与使用。</p>
-<p><img src="http://otu91et2v.bkt.clouddn.com/terminal_emojify.png" alt="emojify"></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://github.com/carloscuesta/gitmoji/" target="_blank" rel="noopener">gitmoji</a></li>
-<li><a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="noopener">An emoji guide for your commit messages</a></li>
-<li><a href="https://github.com/slashsBin/styleguide-git-commit-message" target="_blank" rel="noopener">styleguide-git-commit-message</a></li>
-<li><a href="https://github.com/atom/atom/blob/master/CONTRIBUTING.md#git-commit-messages" target="_blank" rel="noopener">atom git commit messages guide</a></li>
-<li><a href="http://www.webpagefx.com/tools/emoji-cheat-sheet/" target="_blank" rel="noopener">emoji-cheat-sheet</a></li>
-<li><a href="https://www.h5jun.com/post/gitmoji.html" target="_blank" rel="noopener">程序员提交代码的 emoji 指南——原来表情文字不能乱用</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/Nuxt.js的探索与实践/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/15/Nuxt.js的探索与实践/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>Nuxt.js 是一个基于 Vue.js 的通用应用框架。<br>通过对客户端/服务端基础架构的抽象组织，Nuxt.js         主要关注的是应用的 UI渲染。 –Nuxt.js </p>
-</blockquote>
-<p>中文文档地址：<a href="https://zh.nuxtjs.org/guide" target="_blank" rel="noopener">点击这里</a><br>截止到写这篇文章的时候，Nuxt.js发布的版本为 <code>1.0.0-RC11</code>,中文文档更新有滞后性，建议直接看英文文档。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>小分队博客初期是使用Vue作为前端渲染框架，上线之后发现，首次加载速度特别慢，展现也不是很好，前台加载数据具有滞后性，用户体验相对来说就下降很多。由于小分队经费有限，在阿里云1G内存，1核处理器，1M带宽的‘三个一’模式下，首次加载速度高达20s左右，这还是在nginx做了gzip压缩之后的。当然后端接口的请求时间也比较长。详细的架构和改版我们会在另一篇文章中为大家介绍。</p>
-<p>追求性能的我们是绝对是不能忍受这种加载情况的。在翻看了网上的一堆资料后，我们决定将博客的前端改写成为服务端渲染的模式，我们列出了两种方案：</p>
-<ul>
-<li>使用Vue自带的SSR+Koa</li>
-<li>使用现成Vue服务端渲染框架Nuxt.js</li>
-</ul>
-<p>第一种方案造价略高，你得从头搭建整个Vue的SSR渲染环境，还要考虑各种场景的兼容<br>第二种方案造价低，开源，完整的SSR框架，完善的文档，活跃的社区交流</p>
-<p>综合考虑，当然是择优而行了</p>
-<h2 id="开始构建"><a href="#开始构建" class="headerlink" title="开始构建"></a>开始构建</h2><p>使用<code>vue-cli</code>可以快速构建Nuxt项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vue init nuxt-community/starter-template &lt;project-name&gt;</span><br></pre></td></tr></table></figure>
-<p>详细的构建步骤请移步到文档<a href="https://zh.nuxtjs.org/guide" target="_blank" rel="noopener">点击这里</a></p>
-<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><h3 id="assets"><a href="#assets" class="headerlink" title="/assets"></a>/assets</h3><p>这里存放的是项目的资源，图片，样式之类的。我们把sass文件也存放在了这里。将整个项目的样式抽离出单独的sass文件中。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/使用pm2与git仓库部署Node应用/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/15/使用pm2与git仓库部署Node应用/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署</p>
-<h2 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h2><ul>
-<li>开发环境：MacOS 10.13</li>
-<li>程序：Koa+requirejs</li>
-<li>服务器：公司内网服务器 Centos6.8</li>
-<li>代码托管：公司内部gitlab</li>
-<li>程序端口：3000端口 使用pm2进行托管部署</li>
-</ul>
-<h2 id="服务器环境初始化"><a href="#服务器环境初始化" class="headerlink" title="服务器环境初始化"></a>服务器环境初始化</h2><p>接下来以公司服务器系统Centos6.8为例进行说明：<br>服务器上需要安装以下程序和依赖</p>
-<ul>
-<li>Nodejs (项目中运用了大量的ES6，ES7语法，所以我们安装是7.9以上版本)</li>
-<li>NPM</li>
-<li>PM2 <code>npm install pm2 -g</code></li>
-<li>Git <code>yum install git</code></li>
-</ul>
-<h3 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h3><p>作为一名极客，我推荐使用ssh命令行连接服务器<br><code>ssh -p 2222 root@212.22.2.22</code><br>(放弃吧，上面的地址是假的，你们连不进去的)</p>
-<h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>这里我推荐使用<code>nvm</code>进行服务器上node版本管理<br>使用命令<br><code>wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash</code></p>
-<p>安装完成之后将nvm写进系统环境变量中，分别执行<br><code>export NVM_DIR=&quot;$HOME/.nvm&quot;</code><br><code>[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot;</code></p>
-<p>使用如下命令安装7.9.0版本的nodejs<br><code>nvm install 7.9.0</code></p>
-<p>安装完成之后会自动切换成7.9.0版本，如果没有切换，可以使用<br><code>nvm use 7.9.0</code><br>具体使用方法请看文末参考文章。</p>
-<p>tips:安装完nvm之后，可能会发现nvm没有生效，这时退出服务器连接再进入就行了</p>
-<h3 id="安装pm2"><a href="#安装pm2" class="headerlink" title="安装pm2"></a>安装pm2</h3><p>由于国内网络不可抗力因素，通常我们安装npm包都很慢，这里推荐切换成淘宝源来安装<br>此处安利神器<code>nrm</code> 这是一个管理你本地npm源的工具，超级好用</p>
-<p>首先安装<code>nrm</code><br><code>npm install nrm --registry=https://registry.npm.taobao.org</code></p>
-<p>安装成功后，使用命令<br><code>nrm ls</code> 看到如下界面：</p>
-<p><img src="http://otu91et2v.bkt.clouddn.com/QQ20171026-194846@2x.png" alt="nrm 列表"></p>
-<p>使用<code>nrm use taobao</code> 选择淘宝源，然后你就可以放肆地下载各种npm包了。</p>
-<p>输入<code>npm install pm2 -g</code> 安装pm2</p>
-<p>服务器初始环境就暂时告一段落，接下来我们回到本地的配置上来。</p>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>使用<code>yum install git</code> 进行git的安装<br>这里推荐<a href="http://mirrors.aliyun.com/" target="_blank" rel="noopener">阿里云的镜像</a></p>
-<h3 id="配置Git私钥"><a href="#配置Git私钥" class="headerlink" title="配置Git私钥"></a>配置Git私钥</h3><p>使用<code>ssh-keygen</code>在<code>~/.ssh</code>下生成密钥id_rsa,将生成的id_rsa.pub文件复制到git仓库的ssh-key配置页面中</p>
-<h2 id="本地程序配置"><a href="#本地程序配置" class="headerlink" title="本地程序配置"></a>本地程序配置</h2><p>本地同样要有nodejs，npm，pm2，安装方式和服务器上的一样，这里就不过多赘述。</p>
-<p>本文是基于程序代码托管在git上，换句话说就是使用git进行版本控制的，所以本文所述内容不适合svn用户。</p>
-<h3 id="使用pm2的ecosystem"><a href="#使用pm2的ecosystem" class="headerlink" title="使用pm2的ecosystem"></a>使用pm2的ecosystem</h3><p>终端打开本地程序根目录地址，输入<code>pm2 ecosystem</code>,会在你本地生成一个<code>ecosystem.config.js</code>，参照官方文档，我们的配置如下，仅供参考：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    apps: [</span><br><span class="line">        &#123;</span><br><span class="line">            name: <span class="string">'app'</span>,</span><br><span class="line">            script: <span class="string">'./bin/www'</span>,</span><br><span class="line">            env: &#123;</span><br><span class="line">                COMMON_VARIABLE: <span class="string">'true'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            env_production: &#123;</span><br><span class="line">                NODE_ENV: <span class="string">'production'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    ],</span><br><span class="line">    deploy: &#123;</span><br><span class="line">        production: &#123;</span><br><span class="line">            user: <span class="string">'root'</span>,<span class="comment">//服务器用户名</span></span><br><span class="line">            host: <span class="string">'22.22.222.22'</span>,<span class="comment">//服务器地址</span></span><br><span class="line">            port: <span class="string">'4922'</span>,<span class="comment">//服务器连接端口号，默认不写为22</span></span><br><span class="line">            ref: <span class="string">'origin/master'</span>,<span class="comment">//发布的分支版本</span></span><br><span class="line">            repo: <span class="string">'git@xxx.top:front-end/scapp.git'</span>,<span class="comment">//仓库地址</span></span><br><span class="line">            path: <span class="string">'/home/wwwroot/scapp'</span>,<span class="comment">//发布的服务器文件位置</span></span><br><span class="line">            <span class="string">'post-deploy'</span>: <span class="string">'npm install --production &amp;&amp; pm2 reload ecosystem.config.js --env production'</span>,<span class="comment">//部署后需要执行的命令</span></span><br><span class="line">            env: &#123;</span><br><span class="line">                NODE_ENV: <span class="string">'production'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        dev: &#123;</span><br><span class="line">            user: <span class="string">'root'</span>,</span><br><span class="line">            host: <span class="string">'22.22.222.22'</span>,</span><br><span class="line">            port: <span class="string">'4922'</span>,</span><br><span class="line">            ref: <span class="string">'origin/master'</span>,</span><br><span class="line">            repo: <span class="string">'git@xxx.top:front-end/scapp.git'</span>,</span><br><span class="line">            path: <span class="string">'/home/wwwroot/scapp'</span>,</span><br><span class="line">            <span class="string">'post-deploy'</span>: <span class="string">'npm install --production &amp;&amp; pm2 reload ecosystem.config.js --env dev'</span>,</span><br><span class="line">            env: &#123;</span><br><span class="line">                NODE_ENV: <span class="string">'dev'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>因为pm2的部署是通过ssh进行的，因此需要开通本地到远程服务器的无密码登录，同样，在Mac下，通过ssh-keygen生成RSA公钥，并拷贝到远程服务器：<br><code>scp -P 4922 ~/.ssh/id_rsa.pub root@22.222.22.22:/root/.ssh/authorized_keys</code></p>
-<p>这一步很关键，测试成功的方式就是你通过ssh连接服务器，不用再输入密码了，这里面有不少坑，具体等待各位自己踩坑。</p>
-<p>回到本地应用目录，执行命令：<br><code>pm2 deploy ecosystem.json production setup</code></p>
-<p>成功会提示success，如果失败，提示Host key verification failed. 就是没有将你的git仓库加进known_hosts中，在服务器中，注意，在服务器中执行命令：<br><code>ssh-keyscan -t rsa 你的git仓库地址 &gt;&gt; ~/.ssh/known_hosts</code></p>
-<p>加入成功之后，回到本地继续执行：<br><code>pm2 deploy ecosystem.json production setup</code></p>
-<p>这里的production对应的就是刚才的配置文件中的deploy字段下面的属性。配置文件中我写了production和dev，这里我们使用了production进行发布示例。</p>
-<p>不出意外，成功之后提示</p>
-<p>○ setup complete<br>–&gt; Success</p>
-<h2 id="项目部署"><a href="#项目部署" class="headerlink" title="项目部署"></a>项目部署</h2><h3 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h3><p>这一步很重要，发布之前必须保证git的代码与你本地的保持一致。</p>
-<h3 id="代码发布"><a href="#代码发布" class="headerlink" title="代码发布"></a>代码发布</h3><p>在本地程序根目录下输入：<br><code>pm2 deploy ecosystem.json production</code></p>
-<p>等待服务器上npm的安装，代码的更新，成功之后看到的应该是如下：</p>
-<p><img src="http://otu91et2v.bkt.clouddn.com/QQ20171026-201810@2x.png" alt="发布成功"></p>
-<p>至此，我们的程序发布成功。</p>
-<p>在服务器上输入命令<code>pm2 list</code>查看程序运行的状况<br><img src="http://otu91et2v.bkt.clouddn.com/QQ20171026-202051@2x.png" alt="运行状况"></p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="http://bubkoo.com/2017/01/08/quick-tip-multiple-versions-node-nvm/" target="_blank" rel="noopener">使用 nvm 管理不同版本的 node 与 npm</a></li>
-<li><a href="http://www.jianshu.com/p/0deb70e6f395" target="_blank" rel="noopener">npm换源</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/20940096" target="_blank" rel="noopener">通过Github与PM2部署Node应用</a></li>
-<li><a href="https://git-scm.com/book/zh/v1/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5" target="_blank" rel="noopener">服务器上的 Git - 生成 SSH 公钥</a></li>
-<li><a href="http://link.zhihu.com/?target=http%3A//www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/" target="_blank" rel="noopener">SSH Passwordless Login Using SSH Keygen in 5 Easy Steps</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/使用React构建Electron应用-入门踩坑篇/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1028,7 +365,7 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+              <time title="Created: 2019-03-15 14:29:16" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:16+08:00">2019-03-15</time>
             
 
             
@@ -1191,7 +528,7 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+              <time title="Created: 2019-03-15 14:29:16" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:16+08:00">2019-03-15</time>
             
 
             
@@ -1358,7 +695,7 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+              <time title="Created: 2019-03-15 14:29:16" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:16+08:00">2019-03-15</time>
             
 
             
@@ -1521,7 +858,7 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+              <time title="Created: 2019-03-15 14:29:16" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:16+08:00">2019-03-15</time>
             
 
             
@@ -1684,7 +1021,7 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+              <time title="Created: 2019-03-15 14:29:15" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:15+08:00">2019-03-15</time>
             
 
             
@@ -1847,7 +1184,7 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+              <time title="Created: 2019-03-15 14:29:15" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:15+08:00">2019-03-15</time>
             
 
             
@@ -2005,7 +1342,7 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+              <time title="Created: 2019-03-15 14:29:15" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:15+08:00">2019-03-15</time>
             
 
             
@@ -2047,6 +1384,501 @@
 <h2 id="2、刷新-token-的处理代码"><a href="#2、刷新-token-的处理代码" class="headerlink" title="2、刷新 token 的处理代码"></a>2、刷新 token 的处理代码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">token</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $token = JWTAuth::getToken();</span><br><span class="line">        <span class="keyword">if</span> (!$token) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> BadRequestHtttpException(<span class="string">'Token not provided'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            $token = JWTAuth::refresh($token);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TokenInvalidException $e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AccessDeniedHttpException(<span class="string">'The token is invalid'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;response-&gt;withArray([<span class="string">'token'</span> =&gt; $token]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="3、在-Axios-中处理-401-错误，自动刷新-Token"><a href="#3、在-Axios-中处理-401-错误，自动刷新-Token" class="headerlink" title="3、在 Axios 中处理 401 错误，自动刷新 Token"></a>3、在 Axios 中处理 401 错误，自动刷新 Token</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptors.response.use(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> response</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> originalRequest = error.config</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (error.response.status === <span class="number">401</span> &amp;&amp; !originalRequest._retry) &#123;</span><br><span class="line">    originalRequest._retry = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> token = <span class="built_in">window</span>.localStorage.getItem(<span class="string">'token'</span>)</span><br><span class="line">    <span class="keyword">return</span> axios.post(<span class="string">'/v1/token'</span>, &#123; token &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">&#123; data &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.localStorage.setItem(<span class="string">'token'</span>, data.token)</span><br><span class="line">        axios.defaults.headers.common.Authorization = <span class="string">'Bearer '</span> + data.token</span><br><span class="line">        <span class="comment">// retry request</span></span><br><span class="line">        originalRequest.headers.Authorization = <span class="string">'Bearer '</span> + data.token</span><br><span class="line">        <span class="keyword">return</span> axios(originalRequest)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
           
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/axios使用中的奇技淫巧/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/15/axios使用中的奇技淫巧/" class="post-title-link" itemprop="url">axios使用中的奇技淫巧</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-15 14:29:15" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:15+08:00">2019-03-15</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="response拦截器自动刷新token并重新发起请求"><a href="#response拦截器自动刷新token并重新发起请求" class="headerlink" title="response拦截器自动刷新token并重新发起请求"></a>response拦截器自动刷新token并重新发起请求</h2><p>业务场景：后台api接口返回code:-2 就代表着token不存在或者失效</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// respone拦截器</span></span><br><span class="line">service</span><br><span class="line">  .interceptors</span><br><span class="line">  .response</span><br><span class="line">  .use(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = response.data</span><br><span class="line">    <span class="keyword">if</span> (response.data.code === <span class="number">-2</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> originalRequest = response.config<span class="comment">//获取请求的config配置</span></span><br><span class="line">      <span class="keyword">const</span> token = sessionStorage.getItem(<span class="string">'token'</span>)</span><br><span class="line">      <span class="keyword">if</span> (token &amp;&amp; token !== <span class="string">''</span>) &#123; <span class="comment">//token不存在的时候，会在router before中获取，这里只针对token失效的情况</span></span><br><span class="line">        <span class="keyword">return</span> getToken().then(<span class="keyword">async</span>(data) =&gt; &#123; <span class="comment">//重新获取token</span></span><br><span class="line">          sessionStorage.setItem(<span class="string">'token'</span>, data.data.token)</span><br><span class="line">          originalRequest.params.token = data.data.token</span><br><span class="line">          <span class="comment">//由于Promise对象不支持返回值，这里选用了es新特性 async await 关键字</span></span><br><span class="line">          <span class="keyword">let</span> res = <span class="keyword">await</span> axios(originalRequest)</span><br><span class="line">          <span class="keyword">return</span> res.data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res.code !== <span class="number">0</span> &amp;&amp; res.code !== <span class="number">-2</span>) &#123;</span><br><span class="line">      Toast(&#123;<span class="attr">mes</span>: res.msg, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'error'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> response.data</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, error =&gt; &#123;</span><br><span class="line">    Toast(&#123;<span class="attr">mes</span>: error, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/Flexbox 弹性布局拾缀/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/15/Flexbox 弹性布局拾缀/" class="post-title-link" itemprop="url">Flex 弹性布局拾缀</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-15 14:29:15" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:15+08:00">2019-03-15</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p><code>flexbox</code>是一个完整的模块而不是一个单独的属性，它包含了两个部分 父元素<code>flex container</code>，子元素<code>flex items</code>，这两个是属于一个包含关系</p>
+<p><img src="http://p8etabqx7.bkt.clouddn.com/DAFE18EC27B6947E7F89A28FCBBB32EF.jpg" alt="IMAGE"></p>
+<p>如图所示，<code>flexbox</code>有一个主轴<code>main axis</code>,还有一个侧轴<code>cross axis</code></p>
+<ul>
+<li><code>main axis</code> <code>flex item</code>排列的方向，当然这个方向是取决于<code>flex-direction</code>属性，并不是绝对的水平</li>
+<li><code>main start | main end</code> 主轴的开始位置与结束位置</li>
+<li><code>main size</code> 在主轴方向的宽度或高度就是项目的主轴长度</li>
+<li><code>cross axis</code>  与主轴垂直方向的轴叫做侧轴</li>
+<li><code>cross start | cross end</code>  侧轴的开始位置与结束位置</li>
+<li><code>cross size</code>  侧周方向的宽度和高度就是项目的测轴长度</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/15/Flexbox 弹性布局拾缀/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/如何在gulp项目中优雅的使用ES6/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/15/如何在gulp项目中优雅的使用ES6/" class="post-title-link" itemprop="url">如何在gulp项目中优雅的使用ES6</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-15 14:29:15" itemprop="dateCreated datePublished" datetime="2019-03-15T14:29:15+08:00">2019-03-15</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>第一步就是要安装<code>gulp-babel</code></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev gulp-babel</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">"gulp"</span>);</span><br><span class="line"><span class="keyword">var</span> babel = <span class="built_in">require</span>(<span class="string">"gulp-babel"</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"default"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">"src/app.js"</span>)</span><br><span class="line">    .pipe(babel())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">"dist"</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/15/如何在gulp项目中优雅的使用ES6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -2136,7 +1968,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2175,7 +2007,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2272,7 +2106,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

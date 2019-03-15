@@ -320,164 +320,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/Vue代码片段/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/15/Vue代码片段/" class="post-title-link" itemprop="url">Vue代码片段</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录工作中一些常用的代码片段</p>
-<h2 id="vuex-添加对象属性-视图不更新"><a href="#vuex-添加对象属性-视图不更新" class="headerlink" title="vuex 添加对象属性 视图不更新"></a>vuex 添加对象属性 视图不更新</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">editSettings(state, payload)&#123;</span><br><span class="line">    <span class="keyword">let</span> data = state.listData</span><br><span class="line">    state.listData = &#123;...data,...payload.data&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="处理图片错误时的默认图片"><a href="#处理图片错误时的默认图片" class="headerlink" title="处理图片错误时的默认图片"></a>处理图片错误时的默认图片</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">"img-error"</span>, &#123;</span><br><span class="line">  inserted(el)&#123;</span><br><span class="line">    el.addEventListener(<span class="string">"error"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.src = <span class="built_in">require</span>(<span class="string">'./assets/image.png'</span>)</span><br><span class="line">      <span class="keyword">this</span>.alt = <span class="string">"默认图片"</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2017/08/30/axios自动刷新 JWT Token/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1735,6 +1577,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/02/19/Objective-C学习/OC学习笔记-prepareForSegue sender ViewController之间数据传递/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/02/19/Objective-C学习/OC学习笔记-prepareForSegue sender ViewController之间数据传递/" class="post-title-link" itemprop="url">OC学习笔记-prepareForSegue:sender viewController之间数据传递</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-02-19 10:58:17" itemprop="dateCreated datePublished" datetime="2016-02-19T10:58:17+08:00">2016-02-19</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/IOS开发/" itemprop="url" rel="index"><span itemprop="name">IOS开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>IOS开发中，storyboard在UI层面起到了很关键的作用，能让应用在多个ViewController之间来回的切换。切换之中，不可避免的就会遇到多个ViewController之间的数据传递，这里，storyboard有一个非常重要的方法：prepareForSegue:sender<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2016/02/19/Objective-C学习/OC学习笔记-prepareForSegue sender ViewController之间数据传递/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/02/19/Objective-C学习/OC学习笔记-NSString的常用方法/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1899,7 +1904,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/02/19/Objective-C学习/OC学习笔记-prepareForSegue sender ViewController之间数据传递/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/02/10/Quiver快速入门/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -1919,7 +1924,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2016/02/19/Objective-C学习/OC学习笔记-prepareForSegue sender ViewController之间数据传递/" class="post-title-link" itemprop="url">OC学习笔记-prepareForSegue:sender viewController之间数据传递</a>
+                <a href="/2016/02/10/Quiver快速入门/" class="post-title-link" itemprop="url">Quiver快速入门</a>
               
             
           </h2>
@@ -1944,9 +1949,25 @@
                 
               
 
-              <time title="Created: 2016-02-19 10:58:17" itemprop="dateCreated datePublished" datetime="2016-02-19T10:58:17+08:00">2016-02-19</time>
+              <time title="Created: 2016-02-10 15:45:27" itemprop="dateCreated datePublished" datetime="2016-02-10T15:45:27+08:00">2016-02-10</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-13 13:39:40" itemprop="dateModified" datetime="2019-03-13T13:39:40+08:00">2019-03-13</time>
+              
             
           </span>
 
@@ -1962,7 +1983,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/IOS开发/" itemprop="url" rel="index"><span itemprop="name">IOS开发</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/写作技巧/" itemprop="url" rel="index"><span itemprop="name">写作技巧</span></a></span>
 
                 
                 
@@ -1998,11 +2019,11 @@
 
       
         
-          <p>IOS开发中，storyboard在UI层面起到了很关键的作用，能让应用在多个ViewController之间来回的切换。切换之中，不可避免的就会遇到多个ViewController之间的数据传递，这里，storyboard有一个非常重要的方法：prepareForSegue:sender<br>
+          <p>Quiver 是一个程序员专用的记事本应用，可轻松混合文本、代码、Markdown、LaTeX 到一个记事本中。提供强大的代码编辑功能，以及对 Markdown 和 LaTeX 的编辑和即时预览，提供全文搜索功能。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2016/02/19/Objective-C学习/OC学习笔记-prepareForSegue sender ViewController之间数据传递/#more" rel="contents">
+              <a class="btn" href="/2016/02/10/Quiver快速入门/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -2097,7 +2118,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2136,7 +2157,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2233,7 +2256,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
