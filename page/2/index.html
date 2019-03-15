@@ -320,179 +320,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/07/10/axios使用中的奇技淫巧/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/10/axios使用中的奇技淫巧/" class="post-title-link" itemprop="url">axios使用中的奇技淫巧</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-10 15:30:16" itemprop="dateCreated datePublished" datetime="2018-07-10T15:30:16+08:00">2018-07-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="response拦截器自动刷新token并重新发起请求"><a href="#response拦截器自动刷新token并重新发起请求" class="headerlink" title="response拦截器自动刷新token并重新发起请求"></a>response拦截器自动刷新token并重新发起请求</h2><p>业务场景：后台api接口返回code:-2 就代表着token不存在或者失效</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// respone拦截器</span></span><br><span class="line">service</span><br><span class="line">  .interceptors</span><br><span class="line">  .response</span><br><span class="line">  .use(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = response.data</span><br><span class="line">    <span class="keyword">if</span> (response.data.code === <span class="number">-2</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> originalRequest = response.config<span class="comment">//获取请求的config配置</span></span><br><span class="line">      <span class="keyword">const</span> token = sessionStorage.getItem(<span class="string">'token'</span>)</span><br><span class="line">      <span class="keyword">if</span> (token &amp;&amp; token !== <span class="string">''</span>) &#123; <span class="comment">//token不存在的时候，会在router before中获取，这里只针对token失效的情况</span></span><br><span class="line">        <span class="keyword">return</span> getToken().then(<span class="keyword">async</span>(data) =&gt; &#123; <span class="comment">//重新获取token</span></span><br><span class="line">          sessionStorage.setItem(<span class="string">'token'</span>, data.data.token)</span><br><span class="line">          originalRequest.params.token = data.data.token</span><br><span class="line">          <span class="comment">//由于Promise对象不支持返回值，这里选用了es新特性 async await 关键字</span></span><br><span class="line">          <span class="keyword">let</span> res = <span class="keyword">await</span> axios(originalRequest)</span><br><span class="line">          <span class="keyword">return</span> res.data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res.code !== <span class="number">0</span> &amp;&amp; res.code !== <span class="number">-2</span>) &#123;</span><br><span class="line">      Toast(&#123;<span class="attr">mes</span>: res.msg, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'error'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> response.data</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, error =&gt; &#123;</span><br><span class="line">    Toast(&#123;<span class="attr">mes</span>: error, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/07/10/Webpack踩坑指南/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -618,6 +445,179 @@
             </div>
           
           <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/07/10/axios使用中的奇技淫巧/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/07/10/axios使用中的奇技淫巧/" class="post-title-link" itemprop="url">axios使用中的奇技淫巧</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-10 15:30:16" itemprop="dateCreated datePublished" datetime="2018-07-10T15:30:16+08:00">2018-07-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="response拦截器自动刷新token并重新发起请求"><a href="#response拦截器自动刷新token并重新发起请求" class="headerlink" title="response拦截器自动刷新token并重新发起请求"></a>response拦截器自动刷新token并重新发起请求</h2><p>业务场景：后台api接口返回code:-2 就代表着token不存在或者失效</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// respone拦截器</span></span><br><span class="line">service</span><br><span class="line">  .interceptors</span><br><span class="line">  .response</span><br><span class="line">  .use(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = response.data</span><br><span class="line">    <span class="keyword">if</span> (response.data.code === <span class="number">-2</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> originalRequest = response.config<span class="comment">//获取请求的config配置</span></span><br><span class="line">      <span class="keyword">const</span> token = sessionStorage.getItem(<span class="string">'token'</span>)</span><br><span class="line">      <span class="keyword">if</span> (token &amp;&amp; token !== <span class="string">''</span>) &#123; <span class="comment">//token不存在的时候，会在router before中获取，这里只针对token失效的情况</span></span><br><span class="line">        <span class="keyword">return</span> getToken().then(<span class="keyword">async</span>(data) =&gt; &#123; <span class="comment">//重新获取token</span></span><br><span class="line">          sessionStorage.setItem(<span class="string">'token'</span>, data.data.token)</span><br><span class="line">          originalRequest.params.token = data.data.token</span><br><span class="line">          <span class="comment">//由于Promise对象不支持返回值，这里选用了es新特性 async await 关键字</span></span><br><span class="line">          <span class="keyword">let</span> res = <span class="keyword">await</span> axios(originalRequest)</span><br><span class="line">          <span class="keyword">return</span> res.data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res.code !== <span class="number">0</span> &amp;&amp; res.code !== <span class="number">-2</span>) &#123;</span><br><span class="line">      Toast(&#123;<span class="attr">mes</span>: res.msg, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'error'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> response.data</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, error =&gt; &#123;</span><br><span class="line">    Toast(&#123;<span class="attr">mes</span>: error, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+          
         
       
     </div>
