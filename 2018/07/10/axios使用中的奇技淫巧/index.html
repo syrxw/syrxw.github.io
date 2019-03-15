@@ -98,36 +98,25 @@
 
 
 
-  <meta name="description" content="现如今的前端真的是百家争鸣，百花齐放。各路新奇的技术，框架层出不穷，Javascript这门编程语言也被推向了神坛。Javascript在前端，后端，客户端各个领域都想要蚕食一块资源，为前端开发者们带来了新的春天，让很多切图仔们摇身一变，变成了神坛之上的所谓的前端大佬。前端自动化工作流正是这众多前端发展道路上耀眼的一个领域。">
-<meta name="keywords" content="前端,自动化">
+  <meta name="description" content="response拦截器自动刷新token并重新发起请求业务场景：后台api接口返回code:-2 就代表着token不存在或者失效 1234567891011121314151617181920212223242526272829303132// respone拦截器service  .interceptors  .response  .use(response =&amp;gt; &amp;#123;    c">
+<meta name="keywords" content="前端,axios">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈我在前端自动化工作流中的实践">
-<meta property="og:url" content="http://syrxw.pro/2019/03/15/浅谈我在前端自动化工作流中的实践/index.html">
+<meta property="og:title" content="axios使用中的奇技淫巧">
+<meta property="og:url" content="http://syrxw.pro/2018/07/10/axios使用中的奇技淫巧/index.html">
 <meta property="og:site_name" content="手艺人小王">
-<meta property="og:description" content="现如今的前端真的是百家争鸣，百花齐放。各路新奇的技术，框架层出不穷，Javascript这门编程语言也被推向了神坛。Javascript在前端，后端，客户端各个领域都想要蚕食一块资源，为前端开发者们带来了新的春天，让很多切图仔们摇身一变，变成了神坛之上的所谓的前端大佬。前端自动化工作流正是这众多前端发展道路上耀眼的一个领域。">
+<meta property="og:description" content="response拦截器自动刷新token并重新发起请求业务场景：后台api接口返回code:-2 就代表着token不存在或者失效 1234567891011121314151617181920212223242526272829303132// respone拦截器service  .interceptors  .response  .use(response =&amp;gt; &amp;#123;    c">
 <meta property="og:locale" content="zh_Hans">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/QQ20180528-214916@2x.png">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/1.gif">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/hllui.gif">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/QQ20180528-224831@2x.png">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/QQ20180528-224822@2x.png">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/QQ20180528-225331@2x.png">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/QQ20180528-225306@2x.png">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/QQ20180528-225258@2x.png">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/QQ20180528-225250@2x.png">
-<meta property="og:image" content="http://p8etabqx7.bkt.clouddn.com/dotflow.gif">
-<meta property="og:updated_time" content="2019-03-15T06:36:09.750Z">
+<meta property="og:updated_time" content="2019-03-15T06:38:47.777Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈我在前端自动化工作流中的实践">
-<meta name="twitter:description" content="现如今的前端真的是百家争鸣，百花齐放。各路新奇的技术，框架层出不穷，Javascript这门编程语言也被推向了神坛。Javascript在前端，后端，客户端各个领域都想要蚕食一块资源，为前端开发者们带来了新的春天，让很多切图仔们摇身一变，变成了神坛之上的所谓的前端大佬。前端自动化工作流正是这众多前端发展道路上耀眼的一个领域。">
-<meta name="twitter:image" content="http://p8etabqx7.bkt.clouddn.com/QQ20180528-214916@2x.png">
+<meta name="twitter:title" content="axios使用中的奇技淫巧">
+<meta name="twitter:description" content="response拦截器自动刷新token并重新发起请求业务场景：后台api接口返回code:-2 就代表着token不存在或者失效 1234567891011121314151617181920212223242526272829303132// respone拦截器service  .interceptors  .response  .use(response =&amp;gt; &amp;#123;    c">
 
 
 
 
 
 
-  <link rel="canonical" href="http://syrxw.pro/2019/03/15/浅谈我在前端自动化工作流中的实践/"/>
+  <link rel="canonical" href="http://syrxw.pro/2018/07/10/axios使用中的奇技淫巧/"/>
 
 
 
@@ -137,7 +126,7 @@
   };
 </script>
 
-  <title>浅谈我在前端自动化工作流中的实践 | 手艺人小王</title>
+  <title>axios使用中的奇技淫巧 | 手艺人小王</title>
   
 
 
@@ -332,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/浅谈我在前端自动化工作流中的实践/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/07/10/axios使用中的奇技淫巧/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -349,7 +338,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">浅谈我在前端自动化工作流中的实践
+          <h2 class="post-title" itemprop="name headline">axios使用中的奇技淫巧
 
               
             
@@ -375,9 +364,25 @@
                 
               
 
-              <time title="Created: 2019-03-15 14:36:09" itemprop="dateCreated datePublished" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
+              <time title="Created: 2018-07-10 15:30:16" itemprop="dateCreated datePublished" datetime="2018-07-10T15:30:16+08:00">2018-07-10</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
+              
             
           </span>
 
@@ -428,61 +433,8 @@
       
 
       
-        <p>现如今的前端真的是百家争鸣，百花齐放。各路新奇的技术，框架层出不穷，<code>Javascript</code>这门编程语言也被推向了神坛。<code>Javascript</code>在前端，后端，客户端各个领域都想要蚕食一块资源，为前端开发者们带来了新的春天，让很多切图仔们摇身一变，变成了神坛之上的所谓的前端大佬。前端自动化工作流正是这众多前端发展道路上耀眼的一个领域。<br><a id="more"></a></p>
-<h3 id="切图仔的饥荒年代"><a href="#切图仔的饥荒年代" class="headerlink" title="切图仔的饥荒年代"></a>切图仔的饥荒年代</h3><p>在前端自动化一词还未出现在我的眼中之前，我的工作中有这样几个痛点</p>
-<ul>
-<li>html代码无法复用，无法很便捷的使用后台语言的include模版</li>
-<li>由于浏览器厂商之间的明争暗斗，导致了css3属性兼容代码的多样性</li>
-<li>各种雪碧图的生成，css代码的自行定位生成</li>
-<li>写完一段代码，就要手动保存，手动刷新浏览器去查看，还可能受到本地缓存的困扰</li>
-<li>各种代码，资源文件的压缩，加版本号</li>
-<li>代码的语法检测</li>
-<li>开发环境和生产环境的代码分离</li>
-</ul>
-<p>在实际的开发过程中，这些痛点很多时候都因为项目时间不够，一般都是没做，或者通过很多敷衍了事的办法，匆忙上线，这就直接导致了代码的混乱，可维护性差。</p>
-<h3 id="希望的曙光"><a href="#希望的曙光" class="headerlink" title="希望的曙光"></a>希望的曙光</h3><p>随着<code>nodejs</code>的出现，前端攻城狮们将手伸向了不曾也不敢触碰的服务端领域，在服务端上大放异彩，可以用<code>Javascript</code>来操作本地文件了，可以开启子进程对文件进行处理了，可以处理<code>http</code>请求了。这时，我遇见了<code>Grunt</code></p>
-<p><code>Grunt</code>算是前端自动化工作流早期的一个项目了，也算做是一个元老了，距离它的第一个版本发布差不多已经走过了五个春秋，不过至今市面上还有很多开源项目中使用了<code>Grunt</code>。我对<code>Grunt</code>了解的不太深入，大概只经历了10个以内的项目，因为<code>Grunt</code>有个痛点，就是配置文件略微繁琐</p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/QQ20180528-214916@2x.png" alt=""></p>
-<p><code>Grunt</code>是配置和运行分离，每一个task做的事情非常多，而且配置项也很多，就像如今的<code>webpack</code>(间接黑了一把<code>webpack</code>)</p>
-<h3 id="长江后浪推前浪"><a href="#长江后浪推前浪" class="headerlink" title="长江后浪推前浪"></a>长江后浪推前浪</h3><p>既然<code>Grunt</code>饱受诟病，那么就再造个轮子吧。于是，<code>Gulp</code>出现了。</p>
-<p><code>Gulp</code>在经历了4年光辉岁月之后，走到了今天的4.0版本，我也跟着从0.x用到了今天的4.0。<code>Gulp</code>仅拥有6个API，核心的概念就是管道，相信有过<code>Unix</code>经验的同学一定对管道哲学的概念印象很深，以”链式模型”来组成一条直线工作流。</p>
-<p><code>Gulp</code>也拥有丰富的插件，这些插件就解决了我之前的几大痛点</p>
-<ul>
-<li>gulp-file-include 复用html模版</li>
-<li>gulp-minify-css 压缩css</li>
-<li>gulp-sass sass编译</li>
-<li>gulp.spritesmith 雪碧图自动生成图片，并同步生成sass代码</li>
-<li>gulp-uglify js代码压缩</li>
-<li>gulp-autoprefixer css3 属性自动添加前缀</li>
-</ul>
-<p>在编写好<code>gulpfile.js</code>的配置文件之后，在命令行中打开项目根目录路径，运行<code>gulp</code>的启动命令之后，一系列的工作流就会自动运行，在你对文件进行每一次更改之后，<code>gulp</code>都会执行对应的任务，妈妈再也不用担心我的工作烦恼了！</p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/1.gif" alt=""></p>
-<p>虽然这种工作流用起来很爽，但是每次新建项目的时候又是一个痛点，每一次还要把上一个项目复制过去，再执行一次例如npm install安装依赖的动作，这样次数多了，我又开始觉得麻烦了(os：我这人就破事多)，于是不甘寂寞的我写了个项目生成器</p>
-<h3 id="耐损度36的王族之剑"><a href="#耐损度36的王族之剑" class="headerlink" title="耐损度36的王族之剑"></a>耐损度36的王族之剑</h3><p><code>Yeoman</code>是一个强大的前端构建工具，是前面提到的<code>Grunt</code>的好基友，它的作用是什么呢，可以让你的脚手架变成一个模版，通过<code>Yeoman</code>来创建项目，这样，我们就可以使用一个命令来达到初始化创建项目的目的。<code>Yeoman</code>官方提供了一系列的api，你可以自己开发一个<code>generator</code>，我利用它写了个自己的<code>generator</code>，先贴个地址<code>generator-hllui</code></p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/hllui.gif" alt=""></p>
-<p>有此神器之后，切图的效率真的是大幅度的提升，可以让我更加专注地在切图上，免去了很多其他工作的重复消耗</p>
-<p>但是，这个工具在我们团队使用了一段时间之后，我发现了一个问题，就是有些同学记不住命令，或者经常有命令输错的情况，还有很多次命令行工具挂掉的问题。我就想着如何去改进，在某个深夜撸码的时候，下了个决心，决定自己造一个可视化脚手架轮子</p>
-<h3 id="拔出了打boss的大师剑"><a href="#拔出了打boss的大师剑" class="headerlink" title="拔出了打boss的大师剑"></a>拔出了打boss的大师剑</h3><p>我用ELectron+React写了个桌面端应用，这是一个本地脚手架工作平台，是为了应对多元化的业务需求，也是为了能让团队其他前端同学在属于他们自己的领域大放异彩。</p>
-<p>我给它起了个名字，叫Dotflow，手机上一直装着的一个游戏，叫dots，通过连接相同颜色的点，来组成一个回环，消失得分。当所有的点都连在一起的时候，就会行成一条线，虽然过程有所曲折，但是终将会走到终点</p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/QQ20180528-224831@2x.png" alt=""></p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/QQ20180528-224822@2x.png" alt=""></p>
-<p>工作流只是这个应用的其中一部分，工作流内置了我编写的日常使用的脚手架，当这些脚手架满足不了你内心膨胀的欲望的时候，你可以选择添加一个git repo脚手架，也可以添加一个本地脚手架。当然这些脚手架模版还是有一点规范要求的。这里的脚手架已经不局限于基于<code>Gulp</code>的工作流了，你可以添加基于<code>webpack</code>的，基于<code>rollup</code>的，甚至更多适合你自己的脚手架，只要对你的脚手架稍加改造，就可以在这个平台上运行起来</p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/QQ20180528-225331@2x.png" alt=""></p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/QQ20180528-225306@2x.png" alt=""></p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/QQ20180528-225258@2x.png" alt=""></p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/QQ20180528-225250@2x.png" alt=""></p>
-<p>添加脚手架之后你可以选择需要的脚手架新建一个项目，或者你可以在本地导入一个现有项目，是不是很方便</p>
-<p>我还将命令行运行这个过程可视化了，通过点击几个按钮，立马就可以启动项目，又可以愉快的写代码了～～</p>
-<p><img src="http://p8etabqx7.bkt.clouddn.com/dotflow.gif" alt=""></p>
-<h3 id="新的篇章已经开启"><a href="#新的篇章已经开启" class="headerlink" title="新的篇章已经开启"></a>新的篇章已经开启</h3><p>从石器时代到如今的后帝王时代，一路升级打怪，前端在这几年真是出了太多的轮子，当然，这一切都是为了提升效率，让前端圈更加的繁荣发展，毕竟，科学技术是第一生产力。</p>
-<h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><ul>
-<li>Grunt Grunt</li>
-<li>Gulp Gulp</li>
-<li>Yeoman Yeoman</li>
-<li>Webpack Webpack</li>
-<li>Dotlow Dotlow</li>
-</ul>
-
+        <h2 id="response拦截器自动刷新token并重新发起请求"><a href="#response拦截器自动刷新token并重新发起请求" class="headerlink" title="response拦截器自动刷新token并重新发起请求"></a>response拦截器自动刷新token并重新发起请求</h2><p>业务场景：后台api接口返回code:-2 就代表着token不存在或者失效</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// respone拦截器</span></span><br><span class="line">service</span><br><span class="line">  .interceptors</span><br><span class="line">  .response</span><br><span class="line">  .use(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = response.data</span><br><span class="line">    <span class="keyword">if</span> (response.data.code === <span class="number">-2</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> originalRequest = response.config<span class="comment">//获取请求的config配置</span></span><br><span class="line">      <span class="keyword">const</span> token = sessionStorage.getItem(<span class="string">'token'</span>)</span><br><span class="line">      <span class="keyword">if</span> (token &amp;&amp; token !== <span class="string">''</span>) &#123; <span class="comment">//token不存在的时候，会在router before中获取，这里只针对token失效的情况</span></span><br><span class="line">        <span class="keyword">return</span> getToken().then(<span class="keyword">async</span>(data) =&gt; &#123; <span class="comment">//重新获取token</span></span><br><span class="line">          sessionStorage.setItem(<span class="string">'token'</span>, data.data.token)</span><br><span class="line">          originalRequest.params.token = data.data.token</span><br><span class="line">          <span class="comment">//由于Promise对象不支持返回值，这里选用了es新特性 async await 关键字</span></span><br><span class="line">          <span class="keyword">let</span> res = <span class="keyword">await</span> axios(originalRequest)</span><br><span class="line">          <span class="keyword">return</span> res.data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res.code !== <span class="number">0</span> &amp;&amp; res.code !== <span class="number">-2</span>) &#123;</span><br><span class="line">      Toast(&#123;<span class="attr">mes</span>: res.msg, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'error'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> response.data</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, error =&gt; &#123;</span><br><span class="line">    Toast(&#123;<span class="attr">mes</span>: error, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -507,7 +459,7 @@
           
             <a href="/tags/前端/" rel="tag"># 前端</a>
           
-            <a href="/tags/自动化/" rel="tag"># 自动化</a>
+            <a href="/tags/axios/" rel="tag"># axios</a>
           
         </div>
       
@@ -520,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/15/axios使用中的奇技淫巧/" rel="next" title="axios使用中的奇技淫巧">
-                <i class="fa fa-chevron-left"></i> axios使用中的奇技淫巧
+              <a href="/2018/07/10/Webpack踩坑指南/" rel="next" title="Webpack踩坑指南">
+                <i class="fa fa-chevron-left"></i> Webpack踩坑指南
               </a>
             
           </div>
@@ -530,8 +482,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/15/Vue代码片段/" rel="prev" title="Vue代码片段">
-                Vue代码片段 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/18/Vue 项目中的nginx配置/" rel="prev" title="Vue 项目中的nginx配置">
+                Vue 项目中的nginx配置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -605,7 +557,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -787,7 +739,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#切图仔的饥荒年代"><span class="nav-number">1.</span> <span class="nav-text">切图仔的饥荒年代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希望的曙光"><span class="nav-number">2.</span> <span class="nav-text">希望的曙光</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#长江后浪推前浪"><span class="nav-number">3.</span> <span class="nav-text">长江后浪推前浪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#耐损度36的王族之剑"><span class="nav-number">4.</span> <span class="nav-text">耐损度36的王族之剑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拔出了打boss的大师剑"><span class="nav-number">5.</span> <span class="nav-text">拔出了打boss的大师剑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新的篇章已经开启"><span class="nav-number">6.</span> <span class="nav-text">新的篇章已经开启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关资料"><span class="nav-number">7.</span> <span class="nav-text">相关资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#response拦截器自动刷新token并重新发起请求"><span class="nav-number">1.</span> <span class="nav-text">response拦截器自动刷新token并重新发起请求</span></a></li></ol></div>
             
 
           </div>

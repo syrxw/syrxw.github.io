@@ -365,7 +365,7 @@
                 
               
 
-              <time title="Created: 2019-03-15 15:30:16 / Modified: 14:36:09" itemprop="dateCreated datePublished" datetime="2019-03-15T15:30:16+08:00">2019-03-15</time>
+              <time title="Created: 2019-03-15 15:30:16 / Modified: 14:38:47" itemprop="dateCreated datePublished" datetime="2019-03-15T15:30:16+08:00">2019-03-15</time>
             
 
             
@@ -427,639 +427,6 @@
             <p>记录工作中一些常用的代码片段</p>
 <h2 id="vuex-添加对象属性-视图不更新"><a href="#vuex-添加对象属性-视图不更新" class="headerlink" title="vuex 添加对象属性 视图不更新"></a>vuex 添加对象属性 视图不更新</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">editSettings(state, payload)&#123;</span><br><span class="line">    <span class="keyword">let</span> data = state.listData</span><br><span class="line">    state.listData = &#123;...data,...payload.data&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="处理图片错误时的默认图片"><a href="#处理图片错误时的默认图片" class="headerlink" title="处理图片错误时的默认图片"></a>处理图片错误时的默认图片</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">"img-error"</span>, &#123;</span><br><span class="line">  inserted(el)&#123;</span><br><span class="line">    el.addEventListener(<span class="string">"error"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.src = <span class="built_in">require</span>(<span class="string">'./assets/image.png'</span>)</span><br><span class="line">      <span class="keyword">this</span>.alt = <span class="string">"默认图片"</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/浅谈我在前端自动化工作流中的实践/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/15/浅谈我在前端自动化工作流中的实践/" class="post-title-link" itemprop="url">浅谈我在前端自动化工作流中的实践</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-15 14:36:09" itemprop="dateCreated datePublished" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>现如今的前端真的是百家争鸣，百花齐放。各路新奇的技术，框架层出不穷，<code>Javascript</code>这门编程语言也被推向了神坛。<code>Javascript</code>在前端，后端，客户端各个领域都想要蚕食一块资源，为前端开发者们带来了新的春天，让很多切图仔们摇身一变，变成了神坛之上的所谓的前端大佬。前端自动化工作流正是这众多前端发展道路上耀眼的一个领域。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/15/浅谈我在前端自动化工作流中的实践/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/axios使用中的奇技淫巧/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/15/axios使用中的奇技淫巧/" class="post-title-link" itemprop="url">axios使用中的奇技淫巧</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-15 14:36:09" itemprop="dateCreated datePublished" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="response拦截器自动刷新token并重新发起请求"><a href="#response拦截器自动刷新token并重新发起请求" class="headerlink" title="response拦截器自动刷新token并重新发起请求"></a>response拦截器自动刷新token并重新发起请求</h2><p>业务场景：后台api接口返回code:-2 就代表着token不存在或者失效</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// respone拦截器</span></span><br><span class="line">service</span><br><span class="line">  .interceptors</span><br><span class="line">  .response</span><br><span class="line">  .use(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = response.data</span><br><span class="line">    <span class="keyword">if</span> (response.data.code === <span class="number">-2</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> originalRequest = response.config<span class="comment">//获取请求的config配置</span></span><br><span class="line">      <span class="keyword">const</span> token = sessionStorage.getItem(<span class="string">'token'</span>)</span><br><span class="line">      <span class="keyword">if</span> (token &amp;&amp; token !== <span class="string">''</span>) &#123; <span class="comment">//token不存在的时候，会在router before中获取，这里只针对token失效的情况</span></span><br><span class="line">        <span class="keyword">return</span> getToken().then(<span class="keyword">async</span>(data) =&gt; &#123; <span class="comment">//重新获取token</span></span><br><span class="line">          sessionStorage.setItem(<span class="string">'token'</span>, data.data.token)</span><br><span class="line">          originalRequest.params.token = data.data.token</span><br><span class="line">          <span class="comment">//由于Promise对象不支持返回值，这里选用了es新特性 async await 关键字</span></span><br><span class="line">          <span class="keyword">let</span> res = <span class="keyword">await</span> axios(originalRequest)</span><br><span class="line">          <span class="keyword">return</span> res.data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res.code !== <span class="number">0</span> &amp;&amp; res.code !== <span class="number">-2</span>) &#123;</span><br><span class="line">      Toast(&#123;<span class="attr">mes</span>: res.msg, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'error'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> response.data</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, error =&gt; &#123;</span><br><span class="line">    Toast(&#123;<span class="attr">mes</span>: error, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/CentOS 7.x 搭建LNMP环境(长期更新中)/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/15/CentOS 7.x 搭建LNMP环境(长期更新中)/" class="post-title-link" itemprop="url">CentOS 7.x 搭建LNMP环境(长期更新中)</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-15 14:36:09" itemprop="dateCreated datePublished" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/运维挖坑/" itemprop="url" rel="index"><span itemprop="name">运维挖坑</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>网上很多都说通过源码编译安装比yum安装性能提升很多，但这里只提供yum安装方式，源码编译安装过程遇到的问题繁琐，本人经验尚浅，就不在这提供了，敬请谅解</p>
-<h2 id="安装PHP7-3"><a href="#安装PHP7-3" class="headerlink" title="安装PHP7.3"></a>安装PHP7.3</h2><p>据说7.3比7.0的性能提升20%</p>
-<h3 id="添加php最新的源"><a href="#添加php最新的源" class="headerlink" title="添加php最新的源"></a>添加php最新的源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm </span><br><span class="line">sudo yum -y install epel-release yum-utils</span><br></pre></td></tr></table></figure>
-<h3 id="禁用之前的源"><a href="#禁用之前的源" class="headerlink" title="禁用之前的源"></a>禁用之前的源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --disable remi-php54 //这里根据你自己的版本来</span><br><span class="line">sudo yum-config-manager --enable remi-php73</span><br></pre></td></tr></table></figure>
-<h3 id="安装php以及需要的插件"><a href="#安装php以及需要的插件" class="headerlink" title="安装php以及需要的插件"></a>安装php以及需要的插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install php php-cli php-fpm php-mysqlnd php-zip php-devel php-gd php-mcrypt php-mbstring php-curl php-xml php-pear php-bcmath php-json</span><br></pre></td></tr></table></figure>
-<h3 id="检查版本"><a href="#检查版本" class="headerlink" title="检查版本"></a>检查版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php -v</span><br></pre></td></tr></table></figure>
-<h3 id="如何安装扩展"><a href="#如何安装扩展" class="headerlink" title="如何安装扩展"></a>如何安装扩展</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install php-&lt;entension-name&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="查看php-ini位置"><a href="#查看php-ini位置" class="headerlink" title="查看php.ini位置"></a>查看php.ini位置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -i | grep &quot;php.ini&quot;</span><br></pre></td></tr></table></figure>
-<p>默认安装完成之后，<code>php.ini</code>文件位置在<code>/etc/php.ini</code></p>
-<p>通过yum安装完成之后，php-fpm服务应该是加入启动项之中的，可以通过命令来检查是否开机启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl is-enabled php-fpm</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/15/CentOS 7.x 搭建LNMP环境(长期更新中)/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/supervisor/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/15/supervisor/" class="post-title-link" itemprop="url">Untitled</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>supervisorctl shutdown<br>supervisord -c /usr/local/etc/supervisord.ini</p>
-<p>queue:work redis –sleep=3 –tries=3 –daemon</p>
-
           
         
       
@@ -1177,7 +544,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-15 14:36:09" itemprop="dateModified" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
               
             
           </span>
@@ -1364,7 +731,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-15 14:36:09" itemprop="dateModified" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
               
             
           </span>
@@ -1421,6 +788,195 @@
             <p>我们可以使用一个高阶组件来做</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import ErrorPage from &apos;../pages/_error&apos;</span><br><span class="line">export default Component =&gt; &#123;</span><br><span class="line">  return class WithError extends React.Component &#123;</span><br><span class="line">    static async getInitialProps(ctx) &#123;</span><br><span class="line">      const props =</span><br><span class="line">        (Component.getInitialProps</span><br><span class="line">          ? await Component.getInitialProps(ctx)</span><br><span class="line">          : null) || &#123;&#125;</span><br><span class="line"></span><br><span class="line">      if (props.statusCode &amp;&amp; ctx.res) &#123;</span><br><span class="line">        ctx.res.statusCode = props.statusCode</span><br><span class="line">      &#125;</span><br><span class="line">      return props</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">      if (this.props.statusCode) &#123;</span><br><span class="line">        return &lt;ErrorPage statusCode=&#123;this.props.statusCode&#125; /&gt;</span><br><span class="line">      &#125;</span><br><span class="line">      return &lt;Component &#123;...this.props&#125; /&gt;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/11/CentOS 7.x 搭建LNMP环境(长期更新中)/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/11/CentOS 7.x 搭建LNMP环境(长期更新中)/" class="post-title-link" itemprop="url">CentOS 7.x 搭建LNMP环境(长期更新中)</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-11 15:30:16" itemprop="dateCreated datePublished" datetime="2019-03-11T15:30:16+08:00">2019-03-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/运维挖坑/" itemprop="url" rel="index"><span itemprop="name">运维挖坑</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>网上很多都说通过源码编译安装比yum安装性能提升很多，但这里只提供yum安装方式，源码编译安装过程遇到的问题繁琐，本人经验尚浅，就不在这提供了，敬请谅解</p>
+<h2 id="安装PHP7-3"><a href="#安装PHP7-3" class="headerlink" title="安装PHP7.3"></a>安装PHP7.3</h2><p>据说7.3比7.0的性能提升20%</p>
+<h3 id="添加php最新的源"><a href="#添加php最新的源" class="headerlink" title="添加php最新的源"></a>添加php最新的源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm </span><br><span class="line">sudo yum -y install epel-release yum-utils</span><br></pre></td></tr></table></figure>
+<h3 id="禁用之前的源"><a href="#禁用之前的源" class="headerlink" title="禁用之前的源"></a>禁用之前的源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --disable remi-php54 //这里根据你自己的版本来</span><br><span class="line">sudo yum-config-manager --enable remi-php73</span><br></pre></td></tr></table></figure>
+<h3 id="安装php以及需要的插件"><a href="#安装php以及需要的插件" class="headerlink" title="安装php以及需要的插件"></a>安装php以及需要的插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install php php-cli php-fpm php-mysqlnd php-zip php-devel php-gd php-mcrypt php-mbstring php-curl php-xml php-pear php-bcmath php-json</span><br></pre></td></tr></table></figure>
+<h3 id="检查版本"><a href="#检查版本" class="headerlink" title="检查版本"></a>检查版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php -v</span><br></pre></td></tr></table></figure>
+<h3 id="如何安装扩展"><a href="#如何安装扩展" class="headerlink" title="如何安装扩展"></a>如何安装扩展</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install php-&lt;entension-name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看php-ini位置"><a href="#查看php-ini位置" class="headerlink" title="查看php.ini位置"></a>查看php.ini位置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -i | grep &quot;php.ini&quot;</span><br></pre></td></tr></table></figure>
+<p>默认安装完成之后，<code>php.ini</code>文件位置在<code>/etc/php.ini</code></p>
+<p>通过yum安装完成之后，php-fpm服务应该是加入启动项之中的，可以通过命令来检查是否开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl is-enabled php-fpm</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/11/CentOS 7.x 搭建LNMP环境(长期更新中)/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1537,7 +1093,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-15 14:36:09" itemprop="dateModified" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
               
             
           </span>
@@ -1598,6 +1154,185 @@
 <p>后端可以这样获取真实ip，以PHP为例</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_SERVER[<span class="string">'HTTP_X_REAL_IP'</span>]</span><br></pre></td></tr></table></figure>
           
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/09/10/浅谈我在前端自动化工作流中的实践/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/09/10/浅谈我在前端自动化工作流中的实践/" class="post-title-link" itemprop="url">浅谈我在前端自动化工作流中的实践</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-10 15:30:16" itemprop="dateCreated datePublished" datetime="2018-09-10T15:30:16+08:00">2018-09-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>现如今的前端真的是百家争鸣，百花齐放。各路新奇的技术，框架层出不穷，<code>Javascript</code>这门编程语言也被推向了神坛。<code>Javascript</code>在前端，后端，客户端各个领域都想要蚕食一块资源，为前端开发者们带来了新的春天，让很多切图仔们摇身一变，变成了神坛之上的所谓的前端大佬。前端自动化工作流正是这众多前端发展道路上耀眼的一个领域。<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/09/10/浅谈我在前端自动化工作流中的实践/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1714,7 +1449,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-15 14:36:09" itemprop="dateModified" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
               
             
           </span>
@@ -1893,7 +1628,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-15 14:36:09" itemprop="dateModified" datetime="2019-03-15T14:36:09+08:00">2019-03-15</time>
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
               
             
           </span>
@@ -1997,6 +1732,369 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/07/24/Flexbox 弹性布局拾缀/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/07/24/Flexbox 弹性布局拾缀/" class="post-title-link" itemprop="url">Flex 弹性布局拾缀</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-24 15:30:16" itemprop="dateCreated datePublished" datetime="2018-07-24T15:30:16+08:00">2018-07-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p><code>flexbox</code>是一个完整的模块而不是一个单独的属性，它包含了两个部分 父元素<code>flex container</code>，子元素<code>flex items</code>，这两个是属于一个包含关系</p>
+<p><img src="http://p8etabqx7.bkt.clouddn.com/DAFE18EC27B6947E7F89A28FCBBB32EF.jpg" alt="IMAGE"></p>
+<p>如图所示，<code>flexbox</code>有一个主轴<code>main axis</code>,还有一个侧轴<code>cross axis</code></p>
+<ul>
+<li><code>main axis</code> <code>flex item</code>排列的方向，当然这个方向是取决于<code>flex-direction</code>属性，并不是绝对的水平</li>
+<li><code>main start | main end</code> 主轴的开始位置与结束位置</li>
+<li><code>main size</code> 在主轴方向的宽度或高度就是项目的主轴长度</li>
+<li><code>cross axis</code>  与主轴垂直方向的轴叫做侧轴</li>
+<li><code>cross start | cross end</code>  侧轴的开始位置与结束位置</li>
+<li><code>cross size</code>  侧周方向的宽度和高度就是项目的测轴长度</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/07/24/Flexbox 弹性布局拾缀/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/07/18/Vue 项目中的nginx配置/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/07/18/Vue 项目中的nginx配置/" class="post-title-link" itemprop="url">Vue 项目中的nginx配置</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-18 15:30:16" itemprop="dateCreated datePublished" datetime="2018-07-18T15:30:16+08:00">2018-07-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-15 14:38:47" itemprop="dateModified" datetime="2019-03-15T14:38:47+08:00">2019-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h2 id="history模式下-配置rewrite规则"><a href="#history模式下-配置rewrite规则" class="headerlink" title="history模式下 配置rewrite规则"></a>history模式下 配置rewrite规则</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  try_files $uri $uri/ <span class="regexp">/index.html;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置接口的反向代理"><a href="#配置接口的反向代理" class="headerlink" title="配置接口的反向代理"></a>配置接口的反向代理</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">80</span>;</span><br><span class="line">    server_name a.com;</span><br><span class="line">    root /wwwroot/test;</span><br><span class="line">    autoindex off;</span><br><span class="line">    index index.html index.htm index.php;</span><br><span class="line"></span><br><span class="line">    # 将a.com/api的所有请求反向代理到b.com</span><br><span class="line">    location  /open/api &#123;</span><br><span class="line">      proxy_pass http:<span class="comment">//b.com;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ <span class="regexp">/\.ht &#123;</span></span><br><span class="line"><span class="regexp">       deny  all;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2047,7 +2145,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
