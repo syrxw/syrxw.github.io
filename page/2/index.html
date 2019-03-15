@@ -320,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/05/14/child_process.exec 来删除本地文件/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/axios使用中的奇技淫巧/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -340,7 +340,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/05/14/child_process.exec 来删除本地文件/" class="post-title-link" itemprop="url">child_process.exec 来删除本地文件</a>
+                <a href="/2019/03/15/axios使用中的奇技淫巧/" class="post-title-link" itemprop="url">axios使用中的奇技淫巧</a>
               
             
           </h2>
@@ -365,25 +365,9 @@
                 
               
 
-              <time title="Created: 2018-05-14 22:56:09" itemprop="dateCreated datePublished" datetime="2018-05-14T22:56:09+08:00">2018-05-14</time>
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:37:36" itemprop="dateModified" datetime="2019-03-13T13:37:36+08:00">2019-03-13</time>
-              
             
           </span>
 
@@ -436,18 +420,8 @@
       
         
           
-            <p><code>child_process.exec(command[, options][, callback])</code><br>参数一表示 ：使用cmd执行的命令  </p>
-<p>在Windows环境下使用的命令是</p>
-<ul>
-<li><code>rd/s/q</code> 盘符:\某个文件夹  （强制删除文件文件夹和文件夹内所有文件）</li>
-<li><code>del/f/s/q</code> 盘符:\文件名  （强制删除文件，文件名必须加文件后缀名））</li>
-</ul>
-<p>在linux环境下使用的命令是</p>
-<ul>
-<li><code>rm -rf</code></li>
-</ul>
-<p>代码示例</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除文件夹里面的git信息</span></span><br><span class="line"><span class="keyword">if</span>(os.platform() === <span class="string">'darwin'</span>)&#123;</span><br><span class="line">    child = exec(<span class="string">'rm -rf .git'</span>,&#123;<span class="attr">cwd</span>: <span class="string">'/document'</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, out</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(out);</span><br><span class="line">        err &amp;&amp; <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(os.platform() === <span class="string">'win32'</span>)&#123;</span><br><span class="line">    child = exec(<span class="string">'rd/s/q .git'</span>,&#123;<span class="attr">cwd</span>: <span class="string">"D:/document"</span>&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="response拦截器自动刷新token并重新发起请求"><a href="#response拦截器自动刷新token并重新发起请求" class="headerlink" title="response拦截器自动刷新token并重新发起请求"></a>response拦截器自动刷新token并重新发起请求</h2><p>业务场景：后台api接口返回code:-2 就代表着token不存在或者失效</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// respone拦截器</span></span><br><span class="line">service</span><br><span class="line">  .interceptors</span><br><span class="line">  .response</span><br><span class="line">  .use(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = response.data</span><br><span class="line">    <span class="keyword">if</span> (response.data.code === <span class="number">-2</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> originalRequest = response.config<span class="comment">//获取请求的config配置</span></span><br><span class="line">      <span class="keyword">const</span> token = sessionStorage.getItem(<span class="string">'token'</span>)</span><br><span class="line">      <span class="keyword">if</span> (token &amp;&amp; token !== <span class="string">''</span>) &#123; <span class="comment">//token不存在的时候，会在router before中获取，这里只针对token失效的情况</span></span><br><span class="line">        <span class="keyword">return</span> getToken().then(<span class="keyword">async</span>(data) =&gt; &#123; <span class="comment">//重新获取token</span></span><br><span class="line">          sessionStorage.setItem(<span class="string">'token'</span>, data.data.token)</span><br><span class="line">          originalRequest.params.token = data.data.token</span><br><span class="line">          <span class="comment">//由于Promise对象不支持返回值，这里选用了es新特性 async await 关键字</span></span><br><span class="line">          <span class="keyword">let</span> res = <span class="keyword">await</span> axios(originalRequest)</span><br><span class="line">          <span class="keyword">return</span> res.data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res.code !== <span class="number">0</span> &amp;&amp; res.code !== <span class="number">-2</span>) &#123;</span><br><span class="line">      Toast(&#123;<span class="attr">mes</span>: res.msg, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'error'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> response.data</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, error =&gt; &#123;</span><br><span class="line">    Toast(&#123;<span class="attr">mes</span>: error, <span class="attr">timeout</span>: <span class="number">1500</span>, <span class="attr">icon</span>: <span class="string">'error'</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -503,7 +477,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2018/05/08/使用React构建Electron应用-入门踩坑篇/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/Flexbox 弹性布局拾缀/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -523,7 +497,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/05/08/使用React构建Electron应用-入门踩坑篇/" class="post-title-link" itemprop="url">使用React构建Electron应用-入门踩坑篇</a>
+                <a href="/2019/03/15/Flexbox 弹性布局拾缀/" class="post-title-link" itemprop="url">Flex 弹性布局拾缀</a>
               
             
           </h2>
@@ -548,25 +522,9 @@
                 
               
 
-              <time title="Created: 2018-05-08 21:48:27" itemprop="dateCreated datePublished" datetime="2018-05-08T21:48:27+08:00">2018-05-08</time>
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:41:50" itemprop="dateModified" datetime="2019-03-13T13:41:50+08:00">2019-03-13</time>
-              
             
           </span>
 
@@ -618,11 +576,21 @@
 
       
         
-          <p>最近几个晚上都在编写<code>dotflow(一个前端工作流平台)</code>，想尝试一次新技术，就选择了React+Electron技术栈。<code>React</code>是一个前端UI渲染框架，结合React全家桶做SPA也是一把好手；<code>Electron</code>是基于Nodejs的一个编写客户端软件的框架，ps:呵呵，万能的js。<br>
+          <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p><code>flexbox</code>是一个完整的模块而不是一个单独的属性，它包含了两个部分 父元素<code>flex container</code>，子元素<code>flex items</code>，这两个是属于一个包含关系</p>
+<p><img src="http://p8etabqx7.bkt.clouddn.com/DAFE18EC27B6947E7F89A28FCBBB32EF.jpg" alt="IMAGE"></p>
+<p>如图所示，<code>flexbox</code>有一个主轴<code>main axis</code>,还有一个侧轴<code>cross axis</code></p>
+<ul>
+<li><code>main axis</code> <code>flex item</code>排列的方向，当然这个方向是取决于<code>flex-direction</code>属性，并不是绝对的水平</li>
+<li><code>main start | main end</code> 主轴的开始位置与结束位置</li>
+<li><code>main size</code> 在主轴方向的宽度或高度就是项目的主轴长度</li>
+<li><code>cross axis</code>  与主轴垂直方向的轴叫做侧轴</li>
+<li><code>cross start | cross end</code>  侧轴的开始位置与结束位置</li>
+<li><code>cross size</code>  侧周方向的宽度和高度就是项目的测轴长度</li>
+</ul>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/05/08/使用React构建Electron应用-入门踩坑篇/#more" rel="contents">
+              <a class="btn" href="/2019/03/15/Flexbox 弹性布局拾缀/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -682,7 +650,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2017/10/26/使用pm2与git仓库部署Node应用/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/如何在gulp项目中优雅的使用ES6/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -702,7 +670,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/10/26/使用pm2与git仓库部署Node应用/" class="post-title-link" itemprop="url">使用pm2与git仓库部署Node应用</a>
+                <a href="/2019/03/15/如何在gulp项目中优雅的使用ES6/" class="post-title-link" itemprop="url">如何在gulp项目中优雅的使用ES6</a>
               
             
           </h2>
@@ -727,25 +695,620 @@
                 
               
 
-              <time title="Created: 2017-10-26 20:26:33" itemprop="dateCreated datePublished" datetime="2017-10-26T20:26:33+08:00">2017-10-26</time>
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
             
 
             
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>第一步就是要安装<code>gulp-babel</code></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev gulp-babel</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">"gulp"</span>);</span><br><span class="line"><span class="keyword">var</span> babel = <span class="built_in">require</span>(<span class="string">"gulp-babel"</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"default"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp.src(<span class="string">"src/app.js"</span>)</span><br><span class="line">    .pipe(babel())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">"dist"</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/15/如何在gulp项目中优雅的使用ES6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/利用nodejs在线编译打包心得分享/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/15/利用nodejs在线编译打包心得分享/" class="post-title-link" itemprop="url">利用nodejs在线编译打包心得分享</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:41:45" itemprop="dateModified" datetime="2019-03-13T13:41:45+08:00">2019-03-13</time>
               
+
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近在开发一个自定义主题生成工具，需求场景是前台通过修改预置的sass变量，在线生成新的css文件提供下载或者提供内网cdn地址，还可以预览调整的样式。于是花了一两天大致实现了整个流程，其中还踩了几个坑（没有大量阅读文档的后果）现在把实现思路记录并分享出来，希望能给大家一点点参考。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/15/利用nodejs在线编译打包心得分享/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/supervisor/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/15/supervisor/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>supervisorctl shutdown<br>supervisord -c /usr/local/etc/supervisord.ini</p>
+<p>queue:work redis –sleep=3 –tries=3 –daemon</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/nginx反向代理下获取用户真实ip/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/15/nginx反向代理下获取用户真实ip/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>某些场景下，因为使用到了反向代理导致后端程序无法获取用户的真实ip，其实在nginx上加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br></pre></td></tr></table></figure>
+<p>使用示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location /api &#123;</span><br><span class="line">    proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    proxy_pass http://xxx.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后端可以这样获取真实ip，以PHP为例</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_SERVER[<span class="string">'HTTP_X_REAL_IP'</span>]</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/CentOS 7.x 搭建LNMP环境(长期更新中)/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="手艺人小王"/>
+      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
+      <meta itemprop="image" content="/uploads/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="手艺人小王"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/15/CentOS 7.x 搭建LNMP环境(长期更新中)/" class="post-title-link" itemprop="url">CentOS 7.x 搭建LNMP环境(长期更新中)</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
+            
+
             
           </span>
 
@@ -797,18 +1360,21 @@
 
       
         
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>近几日将公司项目开了一个新坑，使用Nodejs进行服务端渲染，为公司团队前后端分离往前推进了一大步，本文就介绍了如何将开发好的Node程序在服务器上完成高逼格自动化部署</p>
-<h2 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h2><ul>
-<li>开发环境：MacOS 10.13</li>
-<li>程序：Koa+requirejs</li>
-<li>服务器：公司内网服务器 Centos6.8</li>
-<li>代码托管：公司内部gitlab</li>
-<li>程序端口：3000端口 使用pm2进行托管部署</li>
-</ul>
+          <p>网上很多都说通过源码编译安装比yum安装性能提升很多，但这里只提供yum安装方式，源码编译安装过程遇到的问题繁琐，本人经验尚浅，就不在这提供了，敬请谅解</p>
+<h2 id="安装PHP7-3"><a href="#安装PHP7-3" class="headerlink" title="安装PHP7.3"></a>安装PHP7.3</h2><p>据说7.3比7.0的性能提升20%</p>
+<h3 id="添加php最新的源"><a href="#添加php最新的源" class="headerlink" title="添加php最新的源"></a>添加php最新的源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm </span><br><span class="line">sudo yum -y install epel-release yum-utils</span><br></pre></td></tr></table></figure>
+<h3 id="禁用之前的源"><a href="#禁用之前的源" class="headerlink" title="禁用之前的源"></a>禁用之前的源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --disable remi-php54 //这里根据你自己的版本来</span><br><span class="line">sudo yum-config-manager --enable remi-php73</span><br></pre></td></tr></table></figure>
+<h3 id="安装php以及需要的插件"><a href="#安装php以及需要的插件" class="headerlink" title="安装php以及需要的插件"></a>安装php以及需要的插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install php php-cli php-fpm php-mysqlnd php-zip php-devel php-gd php-mcrypt php-mbstring php-curl php-xml php-pear php-bcmath php-json</span><br></pre></td></tr></table></figure>
+<h3 id="检查版本"><a href="#检查版本" class="headerlink" title="检查版本"></a>检查版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php -v</span><br></pre></td></tr></table></figure>
+<h3 id="如何安装扩展"><a href="#如何安装扩展" class="headerlink" title="如何安装扩展"></a>如何安装扩展</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install php-&lt;entension-name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="查看php-ini位置"><a href="#查看php-ini位置" class="headerlink" title="查看php.ini位置"></a>查看php.ini位置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -i | grep &quot;php.ini&quot;</span><br></pre></td></tr></table></figure>
+<p>默认安装完成之后，<code>php.ini</code>文件位置在<code>/etc/php.ini</code></p>
+<p>通过yum安装完成之后，php-fpm服务应该是加入启动项之中的，可以通过命令来检查是否开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl is-enabled php-fpm</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2017/10/26/使用pm2与git仓库部署Node应用/#more" rel="contents">
+              <a class="btn" href="/2019/03/15/CentOS 7.x 搭建LNMP环境(长期更新中)/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -868,7 +1434,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2017/09/20/git commit emoji 使用指南/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/Next.js自定义业务错误拦截页面/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -888,7 +1454,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/20/git commit emoji 使用指南/" class="post-title-link" itemprop="url">git commit emoji 使用指南</a>
+                <a href="/2019/03/15/Next.js自定义业务错误拦截页面/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h2>
@@ -913,46 +1479,12 @@
                 
               
 
-              <time title="Created: 2017-09-20 21:58:11" itemprop="dateCreated datePublished" datetime="2017-09-20T21:58:11+08:00">2017-09-20</time>
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:39:00" itemprop="dateModified" datetime="2019-03-13T13:39:00+08:00">2019-03-13</time>
-              
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本控制/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -983,18 +1515,10 @@
 
       
         
-          <h1 id="git-commit-emoji-使用指南"><a href="#git-commit-emoji-使用指南" class="headerlink" title="git commit emoji 使用指南"></a>git commit emoji 使用指南</h1><h1 id="git-commit-emoji-使用指南-1"><a href="#git-commit-emoji-使用指南-1" class="headerlink" title="git commit emoji 使用指南"></a>git commit emoji 使用指南</h1><p>执行 <code>git commit</code> 时使用 emoji 为本次提交打上一个 “标签”, 使得此次 commit 的主要工作得以凸现，也能够使得其在整个提交历史中易于区分与查找。</p>
-<p>截取的 <a href="https://github.com/carloscuesta/gitmoji" target="_blank" rel="noopener">gitmoji</a> 快照:</p>
-<p><img src="http://otu91et2v.bkt.clouddn.com/snapshot.png" alt="gitmoji-snapshot"></p>
-          <!--noindex-->
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2017/09/20/git commit emoji 使用指南/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
+            <p>我们可以使用一个高阶组件来做</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import ErrorPage from &apos;../pages/_error&apos;</span><br><span class="line">export default Component =&gt; &#123;</span><br><span class="line">  return class WithError extends React.Component &#123;</span><br><span class="line">    static async getInitialProps(ctx) &#123;</span><br><span class="line">      const props =</span><br><span class="line">        (Component.getInitialProps</span><br><span class="line">          ? await Component.getInitialProps(ctx)</span><br><span class="line">          : null) || &#123;&#125;</span><br><span class="line"></span><br><span class="line">      if (props.statusCode &amp;&amp; ctx.res) &#123;</span><br><span class="line">        ctx.res.statusCode = props.statusCode</span><br><span class="line">      &#125;</span><br><span class="line">      return props</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">      if (this.props.statusCode) &#123;</span><br><span class="line">        return &lt;ErrorPage statusCode=&#123;this.props.statusCode&#125; /&gt;</span><br><span class="line">      &#125;</span><br><span class="line">      return &lt;Component &#123;...this.props&#125; /&gt;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
-          <!--/noindex-->
         
       
     </div>
@@ -1049,7 +1573,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2017/08/30/axios自动刷新 JWT Token/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/在nuxt.js中使用viser-vue/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -1069,7 +1593,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/08/30/axios自动刷新 JWT Token/" class="post-title-link" itemprop="url">axios 自动刷新 JWT Token</a>
+                <a href="/2019/03/15/在nuxt.js中使用viser-vue/" class="post-title-link" itemprop="url">在nuxt.js中使用viser-vue</a>
               
             
           </h2>
@@ -1094,25 +1618,9 @@
                 
               
 
-              <time title="Created: 2017-08-30 20:25:43" itemprop="dateCreated datePublished" datetime="2017-08-30T20:25:43+08:00">2017-08-30</time>
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:37:40" itemprop="dateModified" datetime="2019-03-13T13:37:40+08:00">2019-03-13</time>
-              
             
           </span>
 
@@ -1164,12 +1672,19 @@
 
       
         
-          <h1 id="axios-自动刷新-JWT-Token"><a href="#axios-自动刷新-JWT-Token" class="headerlink" title="axios 自动刷新 JWT Token"></a>axios 自动刷新 JWT Token</h1><pre><code>本文转载自https://tiicle.com/items/141/automatically-refresh-jwt-axios-token
-</code></pre><h2 id="1、定义刷新-token-的路由"><a href="#1、定义刷新-token-的路由" class="headerlink" title="1、定义刷新 token 的路由"></a>1、定义刷新 token 的路由</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$api = app(<span class="string">'Dingo\Api\Routing\Router'</span>);</span><br><span class="line">$api-&gt;version(<span class="string">'v1'</span>, <span class="function"><span class="keyword">function</span><span class="params">($api)</span></span>&#123;</span><br><span class="line">    $api-&gt;post(<span class="string">'token'</span>, <span class="string">'App\Http\Controllers\AuthController@token'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          <p>viser-vue几乎就没文档，着实很坑。</p>
+<p>首先安装这两个包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install viser-vue </span><br><span class="line">npm install @antv/data-set</span><br></pre></td></tr></table></figure>
+<p>首先先在<code>plugins</code>文件夹下建立<code>viser-vue.js</code>文件</p>
+<p>然后引入viser-vue</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> ViserVue <span class="keyword">from</span> <span class="string">'viser-vue'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  Vue.use(ViserVue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着在<code>nuxt.config.js</code>文件中的<code>plugins</code>配置中写入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">src</span>:<span class="string">'@/plugins/viser-vue'</span>, <span class="attr">ssr</span>: <span class="literal">false</span>&#125;,</span><br></pre></td></tr></table></figure>
+<p>配置好之后重启项目，这里一定要重启</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2017/08/30/axios自动刷新 JWT Token/#more" rel="contents">
+              <a class="btn" href="/2019/03/15/在nuxt.js中使用viser-vue/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1229,7 +1744,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2017/02/20/React 无状态组件 与 高阶组件/"/>
+    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2019/03/15/nginx开启gzip和缓存配置/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="手艺人小王"/>
@@ -1249,7 +1764,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/02/20/React 无状态组件 与 高阶组件/" class="post-title-link" itemprop="url">React 无状态组件 与 高阶组件</a>
+                <a href="/2019/03/15/nginx开启gzip和缓存配置/" class="post-title-link" itemprop="url">nginx开启gzip和缓存配置</a>
               
             
           </h2>
@@ -1274,562 +1789,9 @@
                 
               
 
-              <time title="Created: 2017-02-20 09:57:45" itemprop="dateCreated datePublished" datetime="2017-02-20T09:57:45+08:00">2017-02-20</time>
+              <time title="Created: 2019-03-15 14:16:01" itemprop="dateCreated datePublished" datetime="2019-03-15T14:16:01+08:00">2019-03-15</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:39:46" itemprop="dateModified" datetime="2019-03-13T13:39:46+08:00">2019-03-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>react 无状态组件 与 高阶组件<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2017/02/20/React 无状态组件 与 高阶组件/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/08/01/php 获取系统信息/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/08/01/php 获取系统信息/" class="post-title-link" itemprop="url">php 获取系统信息</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-08-01 12:58:10" itemprop="dateCreated datePublished" datetime="2016-08-01T12:58:10+08:00">2016-08-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:39:29" itemprop="dateModified" datetime="2019-03-13T13:39:29+08:00">2019-03-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/后端杂谈/" itemprop="url" rel="index"><span itemprop="name">后端杂谈</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>我在开发cms的过程中，在首页想获取一堆系统信息，这样显得高大上，在查找了一番资料之后，我将它封装成了一个方法</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/08/01/php 获取系统信息/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/07/23/jquery validate.js 内置及自定义验证规则/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/07/23/jquery validate.js 内置及自定义验证规则/" class="post-title-link" itemprop="url">jquery validate.js 内置及自定义验证规则</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-07-23 07:58:26" itemprop="dateCreated datePublished" datetime="2016-07-23T07:58:26+08:00">2016-07-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:39:12" itemprop="dateModified" datetime="2019-03-13T13:39:12+08:00">2019-03-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="内置的验证规则"><a href="#内置的验证规则" class="headerlink" title="内置的验证规则"></a>内置的验证规则</h2><p>required:true               必输字段<br>remote:”check.php”           使用ajax方法调用check.php验证输入值<br>email:true                   必须输入正确格式的电子邮件<br>url:true                     必须输入正确格式的网址<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/07/23/jquery validate.js 内置及自定义验证规则/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/07/12/EC2搭建vpn服务器/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/07/12/EC2搭建vpn服务器/" class="post-title-link" itemprop="url">EC2搭建vpn服务器</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-07-12 17:16:16" itemprop="dateCreated datePublished" datetime="2016-07-12T17:16:16+08:00">2016-07-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:38:47" itemprop="dateModified" datetime="2019-03-13T13:38:47+08:00">2019-03-13</time>
-              
             
           </span>
 
@@ -1881,198 +1843,19 @@
 
       
         
-          <p>sudo ssh -i ‘/home/xxx/dev/tools/bin/dev.pem’ <a href="mailto:ubuntu@54.186.250.161" target="_blank" rel="noopener">ubuntu@54.186.250.161</a></p>
-<h1 id="ssh-用用户名密码登陆"><a href="#ssh-用用户名密码登陆" class="headerlink" title="ssh 用用户名密码登陆"></a>ssh 用用户名密码登陆</h1><p>sudo passwd root<br>vi  /etc/ssh/sshd_config<br>找到 PasswordAuthentication no，把no改成yes<br>接下来，要重新启动下sshd<br>/sbin/service sshd restart</p>
-<h1 id="service-ssh-restart"><a href="#service-ssh-restart" class="headerlink" title="service ssh restart"></a>service ssh restart</h1><p>/etc/init.d/ssh restart</p>
-<h1 id="root登陆，需要设置root登陆"><a href="#root登陆，需要设置root登陆" class="headerlink" title="root登陆，需要设置root登陆"></a>root登陆，需要设置root登陆</h1>
-          <!--noindex-->
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/07/12/EC2搭建vpn服务器/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
+            <h2 id="开启gzip"><a href="#开启gzip" class="headerlink" title="开启gzip"></a>开启gzip</h2><p>gzip on;</p>
+<h2 id="启用gzip压缩的最小文件，小于设置值的文件将不会压缩"><a href="#启用gzip压缩的最小文件，小于设置值的文件将不会压缩" class="headerlink" title="启用gzip压缩的最小文件，小于设置值的文件将不会压缩"></a>启用gzip压缩的最小文件，小于设置值的文件将不会压缩</h2><p>gzip_min_length 1k;</p>
+<h1 id="gzip-压缩级别"><a href="#gzip-压缩级别" class="headerlink" title="gzip 压缩级别"></a>gzip 压缩级别</h1><p>1-10，数字越大压缩的越好，也越占用CPU时间，后面会有详细说明<br>gzip_comp_level 2;</p>
+<h2 id="进行压缩的文件类型。"><a href="#进行压缩的文件类型。" class="headerlink" title="进行压缩的文件类型。"></a>进行压缩的文件类型。</h2><p>javascript有多种形式。其中的值可以在 mime.types 文件中找到。<br>gzip_types text/plain application/javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;</p>
+<h2 id="是否在http-header中添加Vary-Accept-Encoding，建议开启"><a href="#是否在http-header中添加Vary-Accept-Encoding，建议开启" class="headerlink" title="是否在http header中添加Vary: Accept-Encoding，建议开启"></a>是否在http header中添加Vary: Accept-Encoding，建议开启</h2><p>gzip_vary on;</p>
+<h2 id="禁用IE-6-gzip"><a href="#禁用IE-6-gzip" class="headerlink" title="禁用IE 6 gzip"></a>禁用IE 6 gzip</h2><p>gzip_disable “MSIE [1-6].“;</p>
+<h2 id="开启缓存"><a href="#开启缓存" class="headerlink" title="开启缓存"></a>开启缓存</h2><p>location ~* ^.+.(ico|gif|jpg|jpeg|png)$ {<br>    access_log   off;<br>    expires      30d;<br>}</p>
+<p>location ~* ^.+.(css|js|txt|xml|swf|wav)$ {<br>    access_log   off;<br>    expires      24h;<br>}</p>
+<p>location ~* ^.+.(html|htm)$ {<br>    expires      1h;<br>}</p>
+<p>location ~* ^.+.(eot|ttf|otf|woff|svg)$ {<br>    access_log   off;<br>    expires max;<br>}</p>
+<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><h3 id="expires-30s"><a href="#expires-30s" class="headerlink" title="expires 30s;"></a>expires 30s;</h3><h3 id="expires-30m"><a href="#expires-30m" class="headerlink" title="expires 30m;"></a>expires 30m;</h3><h3 id="expires-2h"><a href="#expires-2h" class="headerlink" title="expires 2h;"></a>expires 2h;</h3><h3 id="expires-30d"><a href="#expires-30d" class="headerlink" title="expires 30d;"></a>expires 30d;</h3>
           
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://syrxw.pro/2016/07/11/文件I O-fs模块/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="手艺人小王"/>
-      <meta itemprop="description" content="皇家布鲁斯特大学手扶拖拉机专业11届优秀毕业生，被大妈说是“学电脑的”。吃饱了撑得学前端."/>
-      <meta itemprop="image" content="/uploads/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="手艺人小王"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/07/11/文件I O-fs模块/" class="post-title-link" itemprop="url">Nodejs入门-文件I/O-fs模块</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-07-11 16:56:04" itemprop="dateCreated datePublished" datetime="2016-07-11T16:56:04+08:00">2016-07-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-13 13:42:56" itemprop="dateModified" datetime="2019-03-13T13:42:56+08:00">2019-03-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端杂谈/" itemprop="url" rel="index"><span itemprop="name">前端杂谈</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>开发中我们经常会有文件I/O的需求，node.js中提供一个名为fs的模块来支持I/O操作，fs模块的文件I/O是对标准POSIX函数的简单封装。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2016/07/11/文件I O-fs模块/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -2116,7 +1899,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2162,7 +1945,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2201,9 +1984,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
